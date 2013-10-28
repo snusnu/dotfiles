@@ -1,0 +1,29 @@
+#!/bin/bash
+
+run_list() {
+
+cat <<EOT
+
+OS X dotfiles - Nicolas Gallagher - http://nicolasgallagher.com/
+
+Additional software to install
+
+Browsers:
+    Firefox
+    Google Chrome
+
+Development:
+    iTerm 2
+    VirtualBox
+    XAMPP
+
+Other:
+    Divvy
+    KeePassX
+    Network Connect
+    Skype
+    Transmission
+    VLC
+EOT
+
+}

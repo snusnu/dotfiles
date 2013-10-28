@@ -1,0 +1,11 @@
+--- 
+gem_path: ~/.gem
+gem: --no-ri --no-rdoc
+:benchmark: false
+:verbose: true
+:backtrace: false
+:update_sources: true
+:sources: 
+- http://rubygems.org
+:bulk_threshold: 1000
+

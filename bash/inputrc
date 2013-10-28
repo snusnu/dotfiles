@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# inputrc
+
+# Use the string that has already been typed as the prefix for searching
+# through commands (i.e. more intelligent Up/Down-arrow behavior)
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+# Never ring any sort of bell during line reading
+set bell-style none
+
+# Ignore case when matching and completing paths
+set completion-ignore-case On
+
+# Treat underscores and hyphens the same way for completion purposes
+set completion-map-case On
+
+# Show me up to 5,000 completion items, don't be shy
+set completion-query-items 5000
+
+# Don't display control characters like ^C if I input them
+set echo-control-characters Off
+
+# Use vim bindings
+set editing-mode vim
+
+# Expand tilde to full path on completion
+set expand-tilde On
+
+# When completing directories, add a trailing slash
+set mark-directories On
+
+# Do the same for symlinked directories
+set mark-symlinked-directories On
+
+# Don't paginate possible completions
+set page-completions Off
+
+# Show multiple completions on first tab press
+set show-all-if-ambiguous On
+
+# Don't re-complete already completed text in the middle of a word
+set skip-completed-text On
