@@ -487,6 +487,8 @@ Bundle "michaeljsmith/vim-indent-object"
 Bundle "mbbill/undotree"
 nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SplitLocation = 'botright'
+let g:undotree_SplitWidth = 30
+let g:undotree_DiffAutoOpen = 0
 
 Bundle "rstacruz/sparkup"
 Bundle "jiangmiao/auto-pairs"
