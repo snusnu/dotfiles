@@ -442,7 +442,7 @@ autocmd User fugitive
 
 Bundle "gregsexton/gitv"
 let g:Gitv_OpenHorizontal = 1
-let g:Gitv_WipeAllOnClose = 0
+let g:Gitv_WipeAllOnClose = 1
 
 " Make fugitive and gitv easier to use
 cabbrev git Git
