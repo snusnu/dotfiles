@@ -477,13 +477,6 @@ vnoremap <leader>t: :Tab /\w:\zs/l0l1<cr>
 
 Bundle "michaeljsmith/vim-indent-object"
 
-"Bundle "sjl/gundo.vim"
-"nnoremap <leader>u :GundoToggle<CR>
-"let g:gundo_width = 25
-"let g:gundo_preview_bottom=1
-"let g:gundo_right=1
-"let g:gundo_help=0
-
 Bundle "mbbill/undotree"
 nnoremap <leader>u :UndotreeToggle<cr>
 let g:undotree_SplitLocation = 'botright'
