@@ -111,6 +111,7 @@ set virtualedit=onemore              " Allow for cursor beyond last character
 "set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids"
 
 set laststatus=2                     " show the status line all the time
+set shell=$SHELL                     " Cause vim to spawn a login shell (will load chruby)
 
 let g:is_bash=1                      " Assume running from bash
 
@@ -311,48 +312,46 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 runtime macros/matchit.vim
 
 filetype off " Vundle needs this for ftdetect to work
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle "gmarik/vundle"
+Plugin 'gmarik/Vundle.vim'
 
-Bundle "kana/vim-textobj-user"
+Plugin 'kana/vim-textobj-user'
 
 let ruby_operators = 1
 let ruby_space_errors = 1
 let ruby_fold = 1
 
 " Programming languages
-Bundle "vim-ruby/vim-ruby"
-Bundle "nelstrom/vim-textobj-rubyblock"
-Bundle "ecomba/vim-ruby-refactoring"
-Bundle "pangloss/vim-javascript"
-Bundle 'elzr/vim-json'
-Bundle "vim-scripts/VimClojure"
-Bundle "kchmck/vim-coffee-script"
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'ecomba/vim-ruby-refactoring'
+Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
+Plugin 'vim-scripts/VimClojure'
+Plugin 'kchmck/vim-coffee-script'
 
 " Solarized color scheme
-Bundle "jwhitley/vim-colors-solarized"
-set background=dark
-set t_Co=256
-colorscheme solarized
+Plugin 'jwhitley/vim-colors-solarized'
+
 " fix vim-gitgutter
 " highlight SignColumn ctermbg=8
 " Set this in case the terminal isn't using solarized theme
 " let g:solarized_termcolors=256
 
-Bundle "scrooloose/nerdtree"
+Plugin 'scrooloose/nerdtree'
 nmap <silent> <leader>y :NERDTreeToggle<CR>
 let NERDTreeMapOpenSplit="s"
 let NERDTreeMapOpenVSplit="v"
 let NERDTreeMinimalUI=1
 let NERDTreeIgnore=['\.rbc$', '\~$']
 
-Bundle "scrooloose/nerdcommenter"
+Plugin 'scrooloose/nerdcommenter'
 
 " Airline Status bar
-Bundle "bling/vim-airline"
-let g:airline_powerline_fonts = 1
+Plugin 'bling/vim-airline'
+"let g:airline_powerline_fonts = 1
 let g:airline_enable_syntastic = 1
 
 " let g:airline_mode_map = {
@@ -368,19 +367,19 @@ let g:airline_enable_syntastic = 1
 "   \ }
 
 " File finder
-Bundle "kien/ctrlp.vim"
+Plugin 'ctrlpvim/ctrlp.vim'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/coverage/*,*/profiling/*,*/measurements/*,*/doc/*
 
-Bundle "terryma/vim-multiple-cursors"
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Lokaltog/vim-easymotion'
 
-Bundle 'ZoomWin'
+Plugin 'ZoomWin'
 map <leader>z :ZoomWin<CR>
 
-Bundle "tpope/vim-eunuch"
+Plugin 'tpope/vim-eunuch'
 ca w!! SudoWrite
 
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-unimpaired'
 " bubble current line
 nmap <C-Down> ]eV=
 nmap <C-Up> [eV=
@@ -388,32 +387,32 @@ nmap <C-Up> [eV=
 vmap <C-Down> ]egv=gv
 vmap <C-Up> [egv=gv
 
-Bundle "mileszs/ack.vim"
+Plugin 'mileszs/ack.vim'
 map <leader>a :Ack!<Space
 
-Bundle "tpope/vim-repeat"
-Bundle "tpope/vim-abolish"
-Bundle "tpope/vim-surround"
-Bundle "vim-scripts/BufOnly.vim"
-Bundle "vim-scripts/taglist.vim"
-Bundle 'majutsushi/tagbar'
-Bundle "sickill/vim-pasta"
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/BufOnly.vim'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'sickill/vim-pasta'
 
 " vim-snipmate + snippets (and utility function providers)
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 
-Bundle "tpope/vim-pastie"
-Bundle "mattn/webapi-vim"
-Bundle "mattn/gist-vim"
+Plugin 'tpope/vim-pastie'
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/gist-vim'
 let g:github_token = $GITHUB_TOKEN
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 
-Bundle "scrooloose/syntastic"
+Plugin 'scrooloose/syntastic'
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
@@ -422,13 +421,13 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_full_redraws = 1
 
-Bundle 'mhinz/vim-signify'
+Plugin 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git' ]
 " be compatible with syntastic signs
 let g:signify_sign_overwrite = 0
 let g:signify_cursorhold_normal = 1
 
-Bundle "tpope/vim-fugitive"
+Plugin 'tpope/vim-fugitive'
 nmap <leader>gw :Gwrite<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit -v<CR>
@@ -440,53 +439,55 @@ autocmd User fugitive
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
 
-Bundle "gregsexton/gitv"
+Plugin 'gregsexton/gitv'
 let g:Gitv_OpenHorizontal = 1
 let g:Gitv_WipeAllOnClose = 1
 
 " Make fugitive and gitv easier to use
 cabbrev git Git
 
-Bundle "matthias-guenther/hammer.vim"
-Bundle "tpope/vim-haml"
-Bundle "slim-template/vim-slim"
-Bundle "timcharper/textile.vim"
-Bundle "zaiste/tmux.vim"
+Plugin 'matthias-guenther/hammer.vim'
+Plugin 'tpope/vim-haml'
+Plugin 'slim-template/vim-slim'
+Plugin 'timcharper/textile.vim'
+Plugin 'zaiste/tmux.vim'
 
-Bundle 'hail2u/vim-css3-syntax'
-Bundle "othree/html5.vim"
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'othree/html5.vim'
 " let g:html5_event_handler_attributes_complete = 0
 let g:html5_rdfa_attributes_complete = 0
 let g:html5_microdata_attributes_complete = 0
 let g:html5_aria_attributes_complete = 0
 
-Bundle "mustache/vim-mode"
+Plugin 'mustache/vim-mode'
 let g:mustache_abbreviations = 1
 
-Bundle "jgdavey/vim-blockle"
+Plugin 'jgdavey/vim-blockle'
 let g:blockle_mapping = '<leader>b'
 
-Bundle "puppetlabs/puppet-syntax-vim"
-Bundle "groenewege/vim-less"
-Bundle "edsono/vim-matchit"
+Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'groenewege/vim-less'
+Plugin 'edsono/vim-matchit'
 
-Bundle "godlygeek/tabular"
+Plugin 'godlygeek/tabular'
 vnoremap <leader>t= :Tab /=<cr>
 vnoremap <leader>t> :Tab /=><cr>
 vnoremap <leader>t: :Tab /\w:\zs/l0l1<cr>
 
-Bundle "michaeljsmith/vim-indent-object"
+Plugin 'michaeljsmith/vim-indent-object'
 
-Bundle "mbbill/undotree"
+Plugin 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
-let g:undotree_SplitLocation = 'botright'
+let g:undotree_WindowLayout = 3
 let g:undotree_SplitWidth = 30
 let g:undotree_DiffAutoOpen = 0
+let g:undotree_DiffpanelHeight = 10
 
-Bundle "rstacruz/sparkup"
-Bundle "jiangmiao/auto-pairs"
+Plugin 'rstacruz/sparkup'
+Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = '<M-p>' " default
 
+call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
 
 " }}}
@@ -590,6 +591,12 @@ command! ListLeaders :call ListLeaders()
 " }}}
 
 " ~~~~~~~~~~~~ include local config  ~~~~~~~~~~~~~~
+
+syntax enable
+set background=dark
+
+"must come after vundle#end()
+colorscheme solarized
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local

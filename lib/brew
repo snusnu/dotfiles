@@ -19,20 +19,25 @@ run_brew() {
         local -a missing_formulae
         local -a desired_formulae=(
             'coreutils' # GNU core utilities (those that come with OS X are outdated)
+            'findutils' # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
             'tree'
-            'wget'
+            'wget --enable-iri'
             'git'
+            'rsync'
             'ack'
             'ctags'
+            'bash'
             'bash-completion'
             'tmux'
-            'ruby-install'
-            'chruby'
-            'vim'
+            'vim --override-system-vi'
             'postgres'
             'libsodium'
             'irssi'
             'python --with-brewed-openssl'
+            'the_silver_searcher'
+            'htop-osx'
+            'imagemagick --with-webp'
+            'node'
         )
 
         for index in ${!desired_formulae[*]}
@@ -54,18 +59,33 @@ run_brew() {
             [[ $? ]] && e_success "Done"
         fi
 
-        # the following formulae need to be installed separately like this, because
-        # the brew install command doesn't accept URIs as comma separated arguments
+        # Uninstall previous versions to make sure we're using --HEAD
 
-        # use latest rsync rather than out-dated OS X rsync
-        # install separately from the main formulae list to fix gh-19
-        brew install https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb
+        if formula_exists "ruby-install"; then brew uninstall ruby-install; fi
+        brew install ruby-install --HEAD
 
-        brew instal https://raw.github.com/postmodern/chgems/master/homebrew/chgems.rb
+        if formula_exists "chruby"; then brew uninstall chruby; fi
+        brew install chruby --HEAD
+
+        if formula_exists "gem_home"; then brew uninstall gem_home; fi
+        brew install --HEAD https://raw.github.com/postmodern/gem_home/master/homebrew/gem_home.rb
 
         # Support installing applications that are distributed as binaries.
-        brew tap phinze/homebrew-cask
-        brew install brew-cask
+        brew install caskroom/cask/brew-cask
+
+        brew cask install firefox
+        brew cask install flash
+        brew cask install google-chrome
+        brew cask install iterm2
+        brew cask install pgadmin3
+        brew cask install github
+        brew cask install gitter
+        brew cask install transmission
+        brew cask install virtualbox
+        brew cask install vlc
+        brew cask install skype
+        brew cask install the-unarchiver
+        brew cask install openoffice
 
         # Remove outdated versions from the Cellar
         brew cleanup

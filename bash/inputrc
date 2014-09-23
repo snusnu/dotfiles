@@ -7,6 +7,9 @@
 "\e[B": history-search-forward
 "\e[A": history-search-backward
 
+# Try to stay at the same the cursor position when moving through the history.
+set history-preserve-point on
+
 # Never ring any sort of bell during line reading
 set bell-style none
 
@@ -42,3 +45,14 @@ set show-all-if-ambiguous On
 
 # Don't re-complete already completed text in the middle of a word
 set skip-completed-text On
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# Show extra file information when completing, like ls -F does.
+set visible-stats on

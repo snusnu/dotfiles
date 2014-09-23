@@ -11,6 +11,8 @@ alias ...="cd ../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
+alias bi="bundle install"
+alias bu="bundle update"
 alias be="bundle exec"
 
 # List dir contents aliases

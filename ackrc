@@ -3,7 +3,7 @@
 --ignore-dir=log
 --ignore-dir=vendor
 --ignore-dir=_site
---type-add=ruby=.haml,.rake
+--type-add=ruby=.haml,.rake,.gemspec,Gemfile*.*
 --type-add=html=.html.erb,.html.haml,.mustache,.ms
 --type-add=css=.sass,.less,.scss
 --type-set=textile=.textile

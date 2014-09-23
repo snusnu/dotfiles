@@ -19,19 +19,13 @@ fi
 cd ${DOTFILES_DIRECTORY}
 
 source ./lib/help
-source ./lib/list
 source ./lib/utils
 source ./lib/brew
+source ./lib/ruby
 
 # Help text
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
     run_help
-    exit
-fi
-
-# List additional software to install
-if [[ "$1" == "-l" || "$1" == "--list" ]]; then
-    run_list
     exit
 fi
 
@@ -56,7 +50,7 @@ fi
 # Check for Homebrew
 if ! type_exists 'brew'; then
     e_header "Installing Homebrew..."
-    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 # Check for git
@@ -85,62 +79,18 @@ if [[ $no_sync ]]; then
     printf "Skipped dotfiles sync.\n"
 else
     e_header "Syncing dotfiles..."
+
     # Pull down the latest changes
     git pull --rebase origin master
 fi
 
 # Install and update packages
 if [[ $no_packages ]]; then
-    printf "Skipped package installations.\n"
+    e_warning "Skipped package installations."
 else
-    printf "Updating packages...\n"
-    # Install Homebrew formulae
+    e_header "Installing homebrew packages ..."
     run_brew
-    # Customize the installed brews and gems
-    customize
 fi
-
-# Customize installed brews and gems
-customize() {
-
-  # Enable htop
-  printf "The sudo password is needed to enable htop ..."
-  sudo chown root:wheel /usr/local/Cellar/htop-osx/0.8.2.1/bin/htop
-  sudo chmod u+s /usr/local/Cellar/htop-osx/0.8.2.1/bin/htop
-
-  # Initialize postgres
-  initdb /usr/local/var/postgres -E utf8
-  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-
-  printf Bundling vim plugins
-  vim +BundleInstall +qall
-
-  printf Installing ruby-1.9 and jruby
-  ruby-install ruby 1.9
-  ruby-install jruby
-
-  printf "Installing default gems for ruby-1.9 ..."
-  chruby ruby-1.9
-  gem env
-  gem install bundler
-  gem install pry
-  gem install pry-debugger
-  gem install pry-stack_explorer
-  gem install pry-exception_explorer
-  gem install pry-theme
-  gem install interactive_editor
-  gem install awesome_print
-  gem install github-markup # convert markup to html with vim hammer plugin
-  gem install tilt          # convert markup to html with vim hammer plugin
-
-  printf "Update python setuptools and pip ..."
-  pip install --upgrade setuptools
-  pip install --upgrade pip
-
-  printf "Install ipython ..."
-  pip install ipython[all]
-}
 
 # Force create/replace the symlink.
 link() {
@@ -184,15 +134,42 @@ if is_confirmed; then
     mirrorfiles
     source ${HOME}/.bash_profile
 else
-    printf "Aborting...\n"
-    exit 1
+    printf "Skipped syncing current dotfiles\n"
 fi
+
+## Best happens after dotfiles have been synced
+e_header "Installing custom software ..."
+
+printf "The sudo password is needed to add brewed bash to /etc/shells and enable htop ..."
+
+sudo bash -c "echo \"/usr/local/bin/bash\" >> /etc/shells"
+
+# Enable htop
+sudo chown root:wheel /usr/local/Cellar/htop-osx/0.8.2.2/bin/htop
+sudo chmod u+s /usr/local/Cellar/htop-osx/0.8.2.2/bin/htop
+
+# Initialize postgres
+initdb /usr/local/var/postgres -E utf8
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+
+e_header "Bundling vim plugins ..."
+vim +PluginInstall +qall
+
+e_header "Updating python setuptools and pip ..."
+pip install --upgrade setuptools
+pip install --upgrade pip
+
+e_header "Installing ipython ..."
+pip install ipython[all]
+
+customize_ruby
 
 # Ask before potentially overwriting OS X defaults
 seek_confirmation "Warning: This step may modify your OS X system defaults."
 
 if is_confirmed; then
-    bash ./bin/osxdefaults
+    bash $DOTFILES_DIRECTORY/bin/osxprops
     e_success "OS X settings updated! You may need to restart."
 else
     printf "Skipped OS X settings update.\n"
