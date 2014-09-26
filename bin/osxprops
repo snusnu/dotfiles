@@ -21,8 +21,8 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # Set standby delay to 1 hours (default is 1 hour)
 sudo pmset -a standbydelay 3600
 
-# Disable the sound effects on boot
-sudo nvram SystemAudioVolume=%80
+# Disable the startup chime on boot (enable it again using: sudo nvram -d SystemAudioVolume)
+sudo nvram SystemAudioVolume="%00"
 
 # Menu bar: disable transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
