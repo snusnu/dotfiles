@@ -23,3 +23,11 @@ qt() {
     #     │└─ search all files under each directory, recursively
     #     └─ ignore case
 }
+
+scan_wifi_signal() {
+  while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI; sleep 0.5; done
+}
+
+scan_wifi_noise() {
+  while x=1; do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlNoise; sleep 0.5; done
+}
