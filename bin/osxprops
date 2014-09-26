@@ -352,6 +352,10 @@ defaults write com.apple.dock minimize-to-application -bool true
 # Enable spring loading for all Dock items
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 
+# Enable dock item magnification
+defaults write com.apple.dock magnification -boolean true
+defaults write com.apple.dock largesize -float 64
+
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 
