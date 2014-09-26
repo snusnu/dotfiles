@@ -102,6 +102,7 @@ PATH="/opt/acme/bin:$PATH"
 Inspiration and code was taken from many sources, including:
 
 * [@necolas](https://github.com/necolas) (Nicolas Gallagher)
+  [https://github.com/necolas/dotfiles](https://github.com/necolas/dotfiles)
 * [@mathiasbynens](https://github.com/mathiasbynens) (Mathias Bynens)
   [https://github.com/mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
 * [@tejr](https://github.com/tejr) (Tom Ryder)
