@@ -137,7 +137,7 @@ else
     printf "Skipped syncing current dotfiles\n"
 fi
 
-## Best happens after dotfiles have been synced
+# Must happen after dotfiles have been synced and sourced
 e_header "Installing custom software ..."
 
 printf "The sudo password is needed to add brewed bash to /etc/shells and enable htop ..."
