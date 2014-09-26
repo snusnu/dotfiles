@@ -102,9 +102,9 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 sudo systemsetup -setrestartfreeze on
 
 # Control sleep behavior
-sudo systemsetup -setdisplaysleep 10
-sudo systemsetup -setharddisksleep 10
-sudo systemsetup -setcomputersleep 30
+sudo systemsetup -setdisplaysleep 10 > /dev/null
+sudo systemsetup -setharddisksleep 10 > /dev/null
+sudo systemsetup -setcomputersleep 30 > /dev/null
 
 sudo pmset -a hibernatemode 3 displaysleep 10 disksleep 10 sleep 30
 
