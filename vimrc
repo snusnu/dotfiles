@@ -446,7 +446,7 @@ let g:Gitv_WipeAllOnClose = 1
 " Make fugitive and gitv easier to use
 cabbrev git Git
 
-Plugin 'matthias-guenther/hammer.vim'
+Plugin 'wikimatze/hammer.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
 Plugin 'timcharper/textile.vim'
