@@ -38,6 +38,8 @@ run_brew() {
             'htop-osx'
             'imagemagick --with-webp'
             'node'
+            'icu4c'
+            'cmake'
         )
 
         for index in ${!desired_formulae[*]}
@@ -86,6 +88,8 @@ run_brew() {
         brew cask install skype
         brew cask install the-unarchiver
         brew cask install openoffice
+        brew cask install insomniax
+        brew cask install itunes-volume-control
 
         # Remove outdated versions from the Cellar
         brew cleanup
