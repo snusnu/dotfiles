@@ -36,3 +36,6 @@ export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";
+
+# Always use JRuby in 1.9 mode
+export JRUBY_OPTS="--1.9"
