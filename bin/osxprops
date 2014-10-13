@@ -626,6 +626,13 @@ defaults write org.m0k.transmission MagnetOpenAsk -bool false
 defaults write org.m0k.transmission RandomPort -bool true
 defaults write org.m0k.transmission BlocklistNew -bool true
 defaults write org.m0k.transmission BlocklistAutoUpdate -bool true
+defaults write org.m0k.transmission CheckQuit -bool true
+defaults write org.m0k.transmission CheckQuitDownloading -bool true
+defaults write org.m0k.transmission CheckRemove -bool true
+defaults write org.m0k.transmission CheckRemoveDownloading -bool true
+defaults write org.m0k.transmission LocalPeerDiscoveryGlobal -bool true
+defaults write org.m0k.transmission RenamePartialFiles -bool true
+defaults write org.m0k.transmission DownloadLocationConstant -bool true
 
 # Download blocklists and make them available to transmission
 # Transmission will parse these automatically on startup
