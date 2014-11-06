@@ -48,15 +48,21 @@ if ! type_exists 'gcc'; then
 fi
 
 # Check for Homebrew
-if ! type_exists 'brew'; then
+if type_exists 'brew'; then
+  e_header "Updating Homebrew..."
+  brew update
+  [[ $? ]] && e_success "Done"
+
+  e_header "Updating any existing Homebrew formulae..."
+  brew upgrade
+  [[ $? ]] && e_success "Done"
+else
     e_header "Installing Homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 # Check for git
 if ! type_exists 'git'; then
-    e_header "Updating Homebrew..."
-    brew update
     e_header "Installing Git..."
     brew install git
 fi

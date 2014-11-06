@@ -4,16 +4,6 @@ run_brew() {
 
     # Check for Homebrew
     if type_exists 'brew'; then
-        e_header "Updating Homebrew..."
-        # Use the latest version of Homebrew
-        brew update
-        [[ $? ]] && e_success "Done"
-
-        e_header "Updating any existing Homebrew formulae..."
-        # Upgrade any already-installed formulae
-        brew upgrade
-        [[ $? ]] && e_success "Done"
-
         e_header "Checking status of desired Homebrew formulae..."
         local list_formulae
         local -a missing_formulae
