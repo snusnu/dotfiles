@@ -3,9 +3,9 @@
 customize_ruby() {
 
   e_header "Installing rubies along with gems ..."
-  ruby-install ruby 1.9
-  ruby-install ruby 2.1
-  ruby-install jruby
+  ruby-install -c ruby 1.9
+  ruby-install -c ruby 2.1
+  ruby-install -c jruby
 
   e_header "Installing global ruby gems ..."
 
