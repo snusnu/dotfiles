@@ -84,6 +84,8 @@ run_brew() {
         brew cask install itunes-volume-control
         brew cask install osxfuse
         brew cask install mediathekview
+        brew cask install macpass
+        brew cask install gpgtools
 
         # Remove outdated versions from the Cellar
         brew cleanup
