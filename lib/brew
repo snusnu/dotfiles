@@ -30,6 +30,7 @@ run_brew() {
             'node'
             'icu4c'
             'cmake'
+            'httpie'
         )
 
         for index in ${!desired_formulae[*]}
