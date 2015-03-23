@@ -21,6 +21,7 @@ run_brew() {
             'tmux'
             'vim --override-system-vi'
             'postgres'
+            'mysql'
             'libsodium'
             'irssi'
             'python --with-brewed-openssl'
@@ -71,7 +72,9 @@ run_brew() {
         brew cask install google-chrome
         brew cask install google-hangouts
         brew cask install iterm2
-        brew cask install pgadmin3
+        brew cask install postico
+        brew cask install sequel-pro
+        brew cask install mesasqlite
         brew cask install github
         brew cask install gitter
         brew cask install slack
