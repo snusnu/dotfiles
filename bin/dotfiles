@@ -188,6 +188,83 @@ pip install ipython[all]
 
 customize_ruby
 
+# customize haskell
+
+e_header "Updating cabal package list"
+cabal update
+
+e_header "Installing happy"
+cabal install happy
+
+export PATH=~/.cabal/bin:$PATH
+
+vim_haskell_path="$HOME/.vim/haskell"
+
+mkdir -p $vim_haskell_path/bin
+mkdir -p $vim_haskell_path/data
+
+e_header "Installing git-hscope"
+cp $DOTFILES_HOME/git/git-hscope $vim_haskell_path/bin
+
+e_header "Checking dependencies for developing Haskell with ViM"
+for i in ctags git ghc cabal make vim curl-config happy; do
+  command -v $i >/dev/null
+  if [ $? -ne 0 ] ; then
+    e_warning "Installer requires ${i}. Please install $i and try again."
+    exit 1
+  fi
+done
+
+e_header "Building vimproc.vim"
+make -C ~/.vim/bundle/vimproc.vim
+
+function build_shared_binary {
+  pkg=$1
+  constraint=$2
+
+  if [ -e $vim_haskell_path/bin/$pkg ]
+  then
+    e_header "$pkg is already installed, skipping build"
+    return
+  fi
+
+  dir=`mktemp -d /${TMPDIR:-/tmp}/build-XXXX`
+
+  e_header "Building $pkg (in $dir)"
+  cd $dir
+  cabal sandbox init
+  cabal install -j --reorder-goals --disable-documentation --datadir=$vim_haskell_path/data --force-reinstalls "${constraint:-$pkg}"
+
+  e_header "Saving $pkg binaries"
+  cp .cabal-sandbox/bin/* $vim_haskell_path/bin
+
+  e_header "Cleaning up"
+  cd -
+  rm -fr $dir
+}
+
+e_header "Building shared binaries for Haskell development with ViM"
+build_shared_binary "ghc-mod", "ghc-mod >= 4 && < 5"
+build_shared_binary "hasktags"
+build_shared_binary "codex"
+build_shared_binary "hscope"
+build_shared_binary "pointfree"
+build_shared_binary "pointful"
+build_shared_binary "hoogle"
+build_shared_binary "stylish-haskell"
+
+
+e_header "Building Hoogle database..."
+$vim_haskell_path/bin/hoogle data
+
+e_header "Configuring codex to search in sandboxes..."
+cat > $HOME/.codex <<EOF
+hackagePath: .cabal-sandbox/packages/
+tagsFileHeader: false
+tagsFileSorted: false
+tagsCmd: hasktags --extendedctag --ignore-close-implementation --ctags --tags-absolute --output='\$TAGS' '\$SOURCES'
+EOF
+
 # Ask before potentially overwriting OS X defaults
 seek_confirmation "Warning: This step may modify your OS X system defaults."
 
