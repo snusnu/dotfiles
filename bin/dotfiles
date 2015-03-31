@@ -3,6 +3,8 @@
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 DOTFILES_TARBALL_PATH="https://github.com/snusnu/dotfiles/tarball/master"
 DOTFILES_GIT_REMOTE="https://github.com/snusnu/dotfiles"
+GIT_TOOLS_GIT_REMOTE="https://github.com/dkubb/git-tools"
+GIT_TOOLS_DIRECTORY="${HOME}/code/git-tools"
 
 # If missing, download and extract the dotfiles repository
 if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
@@ -88,6 +90,21 @@ else
 
     # Pull down the latest changes
     git pull --rebase origin master
+fi
+
+if [[ ! -d ${GIT_TOOLS_DIRECTORY} ]]; then
+    e_header "Cloning dkubb/git-tools"
+    git clone ${GIT_TOOLS_GIT_REMOTE} ${GIT_TOOLS_DIRECTORY}
+
+    e_header "Linking dkubb/git-tools scripts to /usr/local/bin"
+    ln -fs ${GIT_TOOLS_DIRECTORY}/git-fix-branch /usr/local/bin/git-fix-branch
+    ln -fs ${GIT_TOOLS_DIRECTORY}/git-prune-all /usr/local/bin/git-prune-all
+    ln -fs ${GIT_TOOLS_DIRECTORY}/git-push-each /usr/local/bin/git-push-each
+else
+    e_header "Syncing dkubb/git-tools ..."
+    cd $GIT_TOOLS_DIRECTORY
+    git pull --rebase origin master
+    cd -
 fi
 
 # Install and update packages
