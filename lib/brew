@@ -32,6 +32,8 @@ run_brew() {
             'icu4c'
             'cmake'
             'httpie'
+            'ghc'
+            'cabal-install'
         )
 
         for index in ${!desired_formulae[*]}
