@@ -393,8 +393,6 @@ map <leader>a :Ack!<Space
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/BufOnly.vim'
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sickill/vim-pasta'
 
@@ -461,9 +459,6 @@ let g:html5_aria_attributes_complete = 0
 
 Plugin 'mustache/vim-mode'
 let g:mustache_abbreviations = 1
-
-Plugin 'jgdavey/vim-blockle'
-let g:blockle_mapping = '<leader>b'
 
 Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'groenewege/vim-less'
