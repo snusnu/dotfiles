@@ -395,6 +395,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar'
 Plugin 'sickill/vim-pasta'
+let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'haskell', 'tagbar' ]
 
 " vim-snipmate + snippets (and utility function providers)
 Plugin 'MarcWeber/vim-addon-mw-utils'
