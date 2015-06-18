@@ -443,6 +443,9 @@ autocmd User fugitive
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
 
+set diffopt+=vertical
+let g:diff_translations = 0
+
 Plugin 'gregsexton/gitv'
 let g:Gitv_OpenHorizontal = 1
 let g:Gitv_WipeAllOnClose = 1
