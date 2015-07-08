@@ -531,9 +531,11 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>275 286 924 485 0 0 1280 800 </string>
+	<string>275 230 924 485 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>131 56 1025 468 0 0 1280 778 </string>
+	<string>131 73 570 401 0 0 1280 778 </string>
+	<key>NeverWarnAboutShortLivedSessions_1980BFDE-E3C9-4B96-A0B7-5B9A80069F69</key>
+	<true/>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2017,6 +2019,10 @@
 	</array>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
+	<key>NoSyncTimeOfLastPromo</key>
+	<real>458066064.68210399</real>
+	<key>NoSyncTimeOfLastPromoDownload</key>
+	<real>458066064.68214297</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -2081,7 +2087,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-10-25T14:20:38Z</date>
+	<date>2015-07-08T16:34:14Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -2125,6 +2131,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.0</string>
+	<string>2.1.1</string>
 </dict>
 </plist>
