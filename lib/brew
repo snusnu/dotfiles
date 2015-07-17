@@ -80,6 +80,7 @@ run_brew() {
         brew cask install github
         brew cask install gitter
         brew cask install slack
+        brew cask install flowdock
         brew cask install transmission
         brew cask install virtualbox
         brew cask install vlc
