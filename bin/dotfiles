@@ -196,6 +196,9 @@ cabal update
 e_header "Installing happy"
 cabal install happy
 
+e_header "Installing Idris"
+cabal install idris
+
 export PATH=~/.cabal/bin:$PATH
 
 vim_haskell_path="$HOME/.vim/haskell"

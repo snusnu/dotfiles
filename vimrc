@@ -491,6 +491,11 @@ Plugin 'rstacruz/sparkup'
 Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = '<M-p>' " default
 
+" Idris support
+
+Bundle 'idris-hackers/idris-vim'
+let g:idris_conceal = 1
+
 " Haskell Support
 
 Bundle 'raichoo/haskell-vim'

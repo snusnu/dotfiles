@@ -10,6 +10,11 @@ run_brew() {
         local -a desired_formulae=(
             'coreutils' # GNU core utilities (those that come with OS X are outdated)
             'findutils' # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+            'pkg-config'
+            'gmp'
+            'libffi'
+            'boehmgc'
+            'llvm'
             'tree'
             'wget --enable-iri'
             'git'
