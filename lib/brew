@@ -39,6 +39,8 @@ run_brew() {
             'httpie'
             'ghc'
             'cabal-install'
+            'hr'
+            'hh'
         )
 
         for index in ${!desired_formulae[*]}
