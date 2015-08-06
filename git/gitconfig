@@ -45,6 +45,8 @@
     # Use custom `.gitignore` and `.gitattributes`
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
+    autocrlf = input
+    safecrlf = true
 
 [credential]
     helper = osxkeychain
