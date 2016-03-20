@@ -186,6 +186,9 @@ pip install --upgrade pip
 e_header "Installing ipython ..."
 pip install ipython[all]
 
+e_header "Installing vagrant-vbguest plugin ..."
+vagrant plugin install vagrant-vbguest
+
 customize_ruby
 
 # customize haskell
