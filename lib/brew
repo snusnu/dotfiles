@@ -90,6 +90,7 @@ run_brew() {
         brew cask install flowdock
         brew cask install transmission
         brew cask install virtualbox
+        brew cask install vagrant
         brew cask install vlc
         brew cask install skype
         brew cask install the-unarchiver
@@ -100,6 +101,11 @@ run_brew() {
         brew cask install mediathekview
         brew cask install macpass
         brew cask install gpgtools
+        brew cask install owasp-zap
+        brew cask install dockertoolbox
+        brew cask install pivotalbooster
+        brew cask install toggldesktop
+        brew cask install macvim
 
         # Remove outdated versions from the Cellar
         brew cleanup
