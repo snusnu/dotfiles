@@ -531,9 +531,9 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>275 230 924 485 0 0 1280 778 </string>
+	<string>275 214 924 485 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>131 73 570 401 0 0 1280 778 </string>
+	<string>0 0 1280 800 0 0 1280 778 </string>
 	<key>NeverWarnAboutShortLivedSessions_1980BFDE-E3C9-4B96-A0B7-5B9A80069F69</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -2017,18 +2017,20 @@
 			<string>/Users/snusnu</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>458066064.68210399</real>
+	<real>477748126.78306299</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>458066064.68214297</real>
+	<real>479937893.83968401</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenBookmark</key>
-	<false/>
+	<true/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
 	<key>PassOnControlClick</key>
@@ -2083,13 +2085,15 @@
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>http://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/testing.xml</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-07-08T16:34:14Z</date>
+	<date>2016-03-18T15:00:44Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
+	<key>Secure Input</key>
+	<true/>
 	<key>Show Toolbelt</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2131,6 +2135,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.1.1</string>
+	<string>2.1.4</string>
 </dict>
 </plist>
