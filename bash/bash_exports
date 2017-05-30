@@ -10,7 +10,7 @@ export MYVIMRC=~/.dotfiles/vimrc
 export EDITOR="vim"
 
 # Ignore commands that start with spaces and duplicates
-export HISTCONTROL=ignoreboth
+export HISTCONTROL="erasedups:ignoreboth"
 
 # Increase the maximum number of commands to remember
 # (default is 500)
