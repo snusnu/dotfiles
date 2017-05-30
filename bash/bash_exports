@@ -20,6 +20,11 @@ export HISTSIZE=32768
 # (default is 500)
 export HISTFILESIZE=$HISTSIZE
 
+# Use standard ISO 8601 timestamp
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S (24-hours format)
+export HISTTIMEFORMAT='%F %T '
+
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
