@@ -16,27 +16,26 @@ load_dotfiles() {
         /usr/local/share/gem_home/gem_home.sh # Support changing $GEM_HOME
     )
 
-    # if these files are readable, source them
-    for index in ${!files[*]}
-    do
-        if [[ -r ${files[$index]} ]]; then
-            source ${files[$index]}
-        fi
-    done
-}
+  # if these files are readable, source them
+  for index in ${!files[*]}; do
+    if [[ -r ${files[$index]} ]]; then
+      source "${files[$index]}"
+    fi
+  done
 
-# source Bash completion (installed via Homebrew)
-# only use `brew` after it has been added to the PATH
-if [[ -r $(brew --prefix)/etc/bash_completion ]]; then
-    source $(brew --prefix)/etc/bash_completion
-fi
+  # source Bash completion (installed via Homebrew)
+  # only use `brew` after it has been added to the PATH
+  if [[ -r $(brew --prefix)/etc/bash_completion ]]; then
+    source "$(brew --prefix)"/etc/bash_completion
+  fi
 
-# set 256 color profile where possible
-if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+  # set 256 color profile where possible
+  if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
     export TERM=gnome-256color
-elif infocmp xterm-256color >/dev/null 2>&1; then
+  elif infocmp xterm-256color >/dev/null 2>&1; then
     export TERM=xterm-256color
-fi
+  fi
+}
 
 load_dotfiles
 unset load_dotfiles
