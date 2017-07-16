@@ -5,6 +5,7 @@ customize_ruby() {
 
   ruby-install
 
+  ruby-install ruby 2.4.1
 
   chruby 2.4.1
 
