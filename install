@@ -12,7 +12,7 @@ source ./lib/utils.sh
 source ./lib/ruby.sh
 
 e_header "Creating $HOME/{src,bin} directories"
-mkdir -p "$HOME/{src,bin}"
+mkdir -p "$HOME"/{src,bin}
 
 e_header "Creating $HOME/.ssh/config.d/ directory"
 mkdir -p "$HOME/.ssh/config.d"
