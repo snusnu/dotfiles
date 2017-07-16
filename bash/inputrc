@@ -2,10 +2,12 @@
 
 # inputrc
 
-# Use the string that has already been typed as the prefix for searching
-# through commands (i.e. more intelligent Up/Down-arrow behavior)
-"\e[B": history-search-forward
+# Enable incremental history search with up/down arrows (also Readline goodness)
+# Keep left/right cursor keys intact
 "\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
 
 # Try to stay at the same the cursor position when moving through the history.
 set history-preserve-point on
