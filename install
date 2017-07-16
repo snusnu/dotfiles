@@ -7,8 +7,8 @@ DOTFILES_DIRECTORY="$HOME/src/dotfiles"
 GIT_TOOLS_GIT_REMOTE="https://github.com/dkubb/git-tools"
 GIT_TOOLS_DIRECTORY="$HOME/src/git-tools"
 
-e_header "Creating $HOME/src directory"
-mkdir -p "$HOME/src"
+e_header "Creating $HOME/{src,bin} directories"
+mkdir -p "$HOME/{src,bin}"
 
 e_header "Creating $HOME/.ssh/config.d/ directory"
 mkdir -p "$HOME/.ssh/config.d"
@@ -45,22 +45,24 @@ if ! type_exists 'gcc'; then
   exit 1
 fi
 
-# Check for Homebrew
-if type_exists 'brew'; then
-  e_header "Updating Homebrew..."
-  brew update && e_success "Done"
+if [[ "$initial_install" = true ]]; then
+  # Check for Homebrew
+  if type_exists 'brew'; then
+    e_header "Updating Homebrew..."
+    brew update && e_success "Done"
 
-  e_header "Updating any existing Homebrew formulae..."
-  brew upgrade && e_success "Done"
-else
-  e_header "Installing Homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+    e_header "Updating any existing Homebrew formulae..."
+    brew upgrade && e_success "Done"
+  else
+    e_header "Installing Homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
 
-# Check for git
-if ! type_exists 'git'; then
-  e_header "Installing Git..."
-  brew install git
+  # Check for git
+  if ! type_exists 'git'; then
+    e_header "Installing Git..."
+    brew install git
+  fi
 fi
 
 if [[ ! -d $GIT_TOOLS_DIRECTORY ]]; then
