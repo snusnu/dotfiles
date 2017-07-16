@@ -7,6 +7,10 @@ DOTFILES_DIRECTORY="$HOME/src/dotfiles"
 GIT_TOOLS_GIT_REMOTE="https://github.com/dkubb/git-tools"
 GIT_TOOLS_DIRECTORY="$HOME/src/git-tools"
 
+source ./lib/help.sh
+source ./lib/utils.sh
+source ./lib/ruby.sh
+
 e_header "Creating $HOME/{src,bin} directories"
 mkdir -p "$HOME/{src,bin}"
 
@@ -14,10 +18,6 @@ e_header "Creating $HOME/.ssh/config.d/ directory"
 mkdir -p "$HOME/.ssh/config.d"
 
 cd "$DOTFILES_DIRECTORY" || exit 1
-
-source ./lib/help.sh
-source ./lib/utils.sh
-source ./lib/ruby.sh
 
 # Help text
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
