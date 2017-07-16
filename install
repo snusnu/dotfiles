@@ -9,6 +9,7 @@ GIT_TOOLS_DIRECTORY="$HOME/src/git-tools"
 
 source ./lib/help.sh
 source ./lib/utils.sh
+source ./lib/colors.sh
 source ./lib/ruby.sh
 
 e_header "Creating $HOME/{src,bin} directories"
