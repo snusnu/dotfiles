@@ -1,0 +1,186 @@
+#!/bin/bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC1091
+
+DOTFILES_DIRECTORY="$HOME/src/dotfiles"
+
+GIT_TOOLS_GIT_REMOTE="https://github.com/dkubb/git-tools"
+GIT_TOOLS_DIRECTORY="$HOME/src/git-tools"
+
+e_header "Creating $HOME/src directory"
+mkdir -p "$HOME/src"
+
+e_header "Creating $HOME/.ssh/config.d/ directory"
+mkdir -p "$HOME/.ssh/config.d"
+
+cd "$DOTFILES_DIRECTORY" || exit 1
+
+source ./lib/help.sh
+source ./lib/utils.sh
+source ./lib/ruby.sh
+
+# Help text
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  run_help
+  exit
+fi
+
+initial_install=false
+install_packages=false
+
+# Test for known flags
+for opt in "$@"; do
+  case $opt in
+    --initial-install)  initial_install=true ;;
+    --install-packages) install_packages=true ;;
+    -*|--*) e_warning "Warning: invalid option $opt" ;;
+  esac
+done
+
+# Before relying on Homebrew, check that packages can be compiled
+if ! type_exists 'gcc'; then
+  e_error "The XCode Command Line Tools must be installed first."
+  printf "  Download them from: https://developer.apple.com/downloads\n"
+  printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
+  exit 1
+fi
+
+# Check for Homebrew
+if type_exists 'brew'; then
+  e_header "Updating Homebrew..."
+  brew update && e_success "Done"
+
+  e_header "Updating any existing Homebrew formulae..."
+  brew upgrade && e_success "Done"
+else
+  e_header "Installing Homebrew..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Check for git
+if ! type_exists 'git'; then
+  e_header "Installing Git..."
+  brew install git
+fi
+
+if [[ ! -d $GIT_TOOLS_DIRECTORY ]]; then
+  e_header "Cloning dkubb/git-tools"
+  git clone "$GIT_TOOLS_GIT_REMOTE" "$GIT_TOOLS_DIRECTORY"
+
+  e_header "Linking dkubb/git-tools scripts to /usr/local/bin"
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-fix-branch "$HOME"/bin/git-fix-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-prune-all  "$HOME"/bin/git-prune-all
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each  "$HOME"/bin/git-push-each
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each  "$HOME"/bin/git-sync-mtime
+else
+  e_header "Syncing dkubb/git-tools ..."
+  pushd "$GIT_TOOLS_DIRECTORY" || exit 1
+  git pull --rebase origin master
+  popd || exit 1
+fi
+
+# Install and update packages
+if [[ "$install_packages" = true ]]; then
+  source ./macos/brew.sh
+
+  e_header "Installing homebrew packages ..."
+  run_brew
+
+  # Enable htop
+  sudo chown root:wheel /usr/local/Cellar/htop-osx/0.8.2.2/bin/htop
+  sudo chmod u+s /usr/local/Cellar/htop-osx/0.8.2.2/bin/htop
+
+  # Initialize postgres
+  initdb /usr/local/var/postgres -E utf8
+  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+
+else
+  e_warning "Skipping homebrew package installations"
+fi
+
+# Force create/replace the symlink.
+link() {
+  local -r target_root=${3:-$HOME}
+
+  ln -fs "$DOTFILES_DIRECTORY/$1" "$target_root/$2"
+}
+
+# Create the necessary symbolic links between the `.dotfiles` and `HOME`
+# directory. The `bash_profile` sources other files directly from the
+# `.dotfiles` repository.
+link_dotfiles() {
+  link "bash/bashrc"       ".bashrc"
+  link "bash/bash_profile" ".bash_profile"
+  link "bash/inputrc"      ".inputrc"
+  link "bash/hushlogin"    ".hushlogin"
+  link "git/gitattributes" ".gitattributes"
+  link "git/gitignore"     ".gitignore"
+  link "ackrc"             ".ackrc"
+  link "aprc"              ".aprc"
+  link "psqlrc"            ".psqlrc"
+  link "cvsignore"         ".cvsignore"
+  link "gemrc"             ".gemrc"
+  link "irbrc"             ".irbrc"
+  link "pryrc"             ".pryrc"
+  link "ruby-version"      ".ruby-version"
+  link "tmux.conf"         ".tmux.conf"
+  link "vimrc"             ".vimrc"
+}
+
+# Copy `.gitconfig`.
+# Any global git commands in `~/.bash_profile.local` will be written to
+# `.gitconfig`. This prevents them from being committed to the repository.
+mirrorfiles() {
+  mkdir -p "$HOME/bin"
+
+  rsync -avz --quiet "$DOTFILES_DIRECTORY"/git/gitconfig  "$HOME"/.gitconfig
+
+  tee -a "$HOME/.gitconfig" <<EOF
+
+[user]
+    name = $GIT_AUTHOR_NAME
+    email = $GIT_AUTHOR_EMAIL
+EOF
+
+  link_dotfiles
+  e_success "Dotfiles update complete!"
+}
+
+# Ask before potentially overwriting files
+seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+
+if is_confirmed; then
+  mirrorfiles
+  source "$HOME"/.bash_profile
+else
+  e_warning "Skipped syncing current dotfiles"
+fi
+
+if [[ "$install_packages" = true ]]; then
+  e_header "Installing custom software ..."
+
+  printf "The sudo password is needed to add brewed bash to /etc/shells and enable htop ..."
+
+  # Must happen after dotfiles have been synced and sourced
+  sudo bash -c "echo \"/usr/local/bin/bash\" >> /etc/shells"
+fi
+
+customize_ruby
+
+e_header "Bundling vim plugins ..."
+vim +PluginInstall +qall
+
+# Ask before potentially overwriting macOS defaults
+seek_confirmation "Warning: This step may modify your macOS system defaults."
+if is_confirmed; then
+  source "$DOTFILES_DIRECTORY"/macos/customize.sh
+
+  [ "$initial_install" = true ] && customize_macos_host
+
+  customize_macos
+
+  e_success "macos settings updated! You may need to restart."
+else
+  echo "Skipped macos settings update."
+fi

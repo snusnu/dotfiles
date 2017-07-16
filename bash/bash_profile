@@ -1,27 +1,24 @@
 #!/bin/bash
 # shellcheck disable=SC1090
 
-# bash_profile
-
 load_dotfiles() {
+  local -r dotfiles_directory=${1:-"$HOME/src/dotfiles"}
+
   declare -a files=(
-    $HOME/.dotfiles/bash/bash_options     # Options
-    $HOME/.dotfiles/bash/bash_exports     # Exports
-    $HOME/.dotfiles/bash/bash_aliases     # Aliases
-    $HOME/.bash_profile.local             # Local and private settings not under version control (e.g. git credentials)
-    $HOME/.dotfiles/bash/bash_paths       # Path modifications (must source after `.bash_profile.local` in case of custom `brew` location)
-    $HOME/.iterm2_shell_integration.bash  # Activate iTerm2 shell extensions
     /usr/local/share/chruby/chruby.sh     # Enable postmodern/chruby
     /usr/local/share/chruby/auto.sh       # Enable autoswitching of rubies
-    $HOME/lib/prompt.sh                   # bash prompt helpers
-    $HOME/.dotfiles/bash/bash_prompt      # Custom bash prompt
+    $dotfiles_directory/bash/bash_options # Options
+    $dotfiles_directory/bash/bash_exports # Exports
+    $dotfiles_directory/bash/bash_aliases # Aliases
+    $HOME/.iterm2_shell_integration.bash  # Activate iTerm2 shell extensions
+    $HOME/.bash_profile.local             # Local and private settings not under version control (e.g. git credentials)
+    $dotfiles_directory/bash/bash_paths   # Path modifications (must source after `.bash_profile.local` in case of custom `brew` location)
+    $dotfiles_directory/bash/bash_prompt  # Custom bash prompt
   )
 
   # if these files are readable, source them
   for index in ${!files[*]}; do
-    if [[ -r ${files[$index]} ]]; then
-      source "${files[$index]}"
-    fi
+    [[ -r ${files[$index]} ]] && source "${files[$index]}"
   done
 
   # source Bash completion (installed via Homebrew)
@@ -38,5 +35,6 @@ load_dotfiles() {
   fi
 }
 
-load_dotfiles
+load_dotfiles "$HOME/src/dotfiles"
+
 unset load_dotfiles

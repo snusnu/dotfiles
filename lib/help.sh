@@ -1,9 +1,8 @@
 #!/bin/bash
 
 run_help() {
-
 cat <<EOT
-OS X dotfiles - Martin Gamsjäger - https://github.com/snusnu/dotfiles
+macOS dotfiles - https://github.com/snusnu/dotfiles
 
 Usage: $(basename "$0") [options]
 
@@ -12,10 +11,5 @@ Options:
     --no-packages   Suppress package updates
     --no-sync       Suppress pulling from the remote repository
 
-Documentation can be found at https://github.com/snusnu/dotfiles/
-
-Copyright (c) Nicolas Gallagher and Martin Gamsjäger (snusnu)
-Licensed under the MIT license.
 EOT
-
 }

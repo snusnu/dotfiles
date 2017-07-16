@@ -12,7 +12,8 @@ set hidden                           " allow buffer switching without saving
 set nowrap                           " don't wrap long lines by default
 set showbreak=↪                      " better line wraps
 set autoindent                       " for filetypes that doesn't have indent rules
-set relativenumber                   " show relative line numbering
+set number                           " show line numbering
+set norelativenumber                 " show absolute line numbers
 set numberwidth=2                    " display 2 columns
 
 set softtabstop=2                    " soft tab width
@@ -113,11 +114,34 @@ set virtualedit=onemore              " Allow for cursor beyond last character
 set laststatus=2                     " show the status line all the time
 set shell=$SHELL                     " Cause vim to spawn a login shell (will load chruby)
 
+set guifont=Monaco:h12
+set guioptions-=T
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+
+  if !exists(":Ag")
+    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+    nnoremap \ :Ag<SPACE>
+  endif
+endif
+
 let g:is_bash=1                      " Assume running from bash
 
-if has('mouseshape') " doesn't come with-feature-set=huge
-  set mouseshape = s:updown,sd:udsizing,m:arrow,vs:leftright,vd:lrsizing
-endif
+" if has('mouseshape') " doesn't come with-feature-set=huge
+"   set mouseshape = s:updown,sd:udsizing,m:arrow,vs:leftright,vd:lrsizing
+" endif
 
 " }}}
 
@@ -164,6 +188,9 @@ noremap <End> g<End>
 noremap 0 g0
 noremap <Home> g<Home>
 noremap ^ g^
+
+" Run commands that require an interactive shell
+nnoremap <Leader>r :RunInInteractiveShell<space>
 
 " The following two lines conflict with moving to top and bottom of the screen
 map <S-H> gT
@@ -305,9 +332,6 @@ noremap <leader>n :call ToggleNumbering()<cr>
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-" Find custom built ghc-mod, codex etc
-let $PATH = $PATH . ':' . expand("~/.vim/haskell/bin")
-
 " }}}
 
 " Plugins {{{
@@ -334,6 +358,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'vim-scripts/VimClojure'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'vito-c/jq.vim'
 
 " Solarized color scheme
 Plugin 'jwhitley/vim-colors-solarized'
@@ -353,7 +378,7 @@ let NERDTreeIgnore=['\.rbc$', '\~$']
 Plugin 'scrooloose/nerdcommenter'
 
 " Airline Status bar
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 "let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 
@@ -368,6 +393,9 @@ let g:airline#extensions#syntastic#enabled = 1
 "   \ 's'  : 'S',
 "   \ 'S'  : 'S',
 "   \ }
+
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme = 'solarized'
 
 " File finder
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -491,174 +519,14 @@ Plugin 'rstacruz/sparkup'
 Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = '<M-p>' " default
 
-" Idris support
-
-Bundle 'idris-hackers/idris-vim'
-let g:idris_conceal = 1
-
-" Haskell Support
-
-Bundle 'raichoo/haskell-vim'
-
-" Enable some tabular presets for Haskell
-let g:haskell_tabular = 1
-
-Bundle 'enomsg/vim-haskellConcealPlus'
-" Pretty unicode haskell symbols
-let g:haskell_conceal_wide = 1
-let g:haskell_conceal_enumerations = 1
-let hscoptions="𝐒𝐓𝐄𝐌xRtB𝔻"
-
-" Needed by ghcmod-vim
-Bundle 'Shougo/vimproc.vim'
-Bundle 'eagletmt/ghcmod-vim'
-
-Bundle 'eagletmt/neco-ghc'
-
-" Show types in completion suggestions
-let g:necoghc_enable_detailed_browse = 1
-
-Bundle 'Twinside/vim-hoogle'
+Plugin 'LeonB/vim-nginx'
 
 call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
 
 " }}}
 
-" Use same color behind concealed unicode characters
-hi clear Conceal
-
-" Tags {{{
-
-set tags=tags;/,codex.tags;/
-
-let g:tagbar_type_haskell = {
-    \ 'ctagsbin'  : 'hasktags',
-    \ 'ctagsargs' : '-x -c -o-',
-    \ 'kinds'     : [
-        \  'm:modules:0:1',
-        \  'd:data: 0:1',
-        \  'd_gadt: data gadt:0:1',
-        \  't:type names:0:1',
-        \  'nt:new types:0:1',
-        \  'c:classes:0:1',
-        \  'cons:constructors:1:1',
-        \  'c_gadt:constructor gadt:1:1',
-        \  'c_a:constructor accessors:1:1',
-        \  'ft:function types:1:1',
-        \  'fi:function implementations:0:1',
-        \  'o:others:0:1'
-    \ ],
-    \ 'sro'        : '.',
-    \ 'kind2scope' : {
-        \ 'm' : 'module',
-        \ 'c' : 'class',
-        \ 'd' : 'data',
-        \ 't' : 'type'
-    \ },
-    \ 'scope2kind' : {
-        \ 'module' : 'm',
-        \ 'class'  : 'c',
-        \ 'data'   : 'd',
-        \ 'type'   : 't'
-    \ }
-\ }
-
-" Generate haskell tags with codex and hscope
-map <leader>tg :!codex update --force<CR>:call system("git hscope -X TemplateHaskell")<CR><CR>:call LoadHscope()<CR>
-
-map <leader>tt :TagbarToggle<CR>
-
-set csprg=~/.vim/haskell/bin/hscope
-set csto=1 " search codex tags first
-set cst
-set csverb
-nnoremap <silent> <C-\> :cs find c <C-R>=expand("<cword>")<CR><CR>
-
-" Automatically make cscope connections
-function! LoadHscope()
-  let db = findfile("hscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/hscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-  endif
-endfunction
-
-au BufEnter /*.hs call LoadHscope()
-
-" }}}
-
 " Autocommands {{{
-
-" Use stylish haskell instead of par for haskell buffers
-autocmd FileType haskell let &formatprg="stylish-haskell"
-
-nmap <silent> <leader><cr> :noh<cr>
-augroup haskell
-  autocmd!
-  autocmd FileType haskell map <silent> <leader><cr> :noh<cr>:GhcModTypeClear<cr>:SyntasticReset<cr>
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup END
-
-
-" Haskell Interrogation {{{
-
-set completeopt+=longest
-
-" Use buffer words as default tab completion
-let g:SuperTabDefaultCompletionType = '<c-x><c-p>'
-
-" But provide (neco-ghc) omnicompletion
-if has("gui_running")
-  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-  endif
-endif
-
-" Type of expression under cursor
-nmap <silent> <leader>ht :GhcModType<CR>
-" Insert type of expression under cursor
-nmap <silent> <leader>hT :GhcModTypeInsert<CR>
-" GHC errors and warnings
-nmap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>
-" Haskell Lint
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['haskell'] }
-nmap <silent> <leader>hl :SyntasticCheck hlint<CR>
-
-" Hoogle the word under the cursor
-nnoremap <silent> <leader>hh :Hoogle<CR>
-
-" Hoogle and prompt for input
-nnoremap <leader>hH :Hoogle
-
-" Hoogle for detailed documentation (e.g. "Functor")
-nnoremap <silent> <leader>hi :HoogleInfo<CR>
-
-" Hoogle for detailed documentation and prompt for input
-nnoremap <leader>hI :HoogleInfo
-
-" Hoogle, close the Hoogle window
-nnoremap <silent> <leader>hz :HoogleClose<CR>
-
-" }}}
-
-" Conversion {{{
-
-function! Pointfree()
-  call setline('.', split(system('pointfree '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
-endfunction
-vnoremap <silent> <leader>h. :call Pointfree()<CR>
-
-function! Pointful()
-  call setline('.', split(system('pointful '.shellescape(join(getline(a:firstline, a:lastline), "\n"))), "\n"))
-endfunction
-vnoremap <silent> <leader>h> :call Pointful()<CR>
-
-" }}}
 
 augroup misc
 

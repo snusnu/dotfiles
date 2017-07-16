@@ -1,0 +1,15 @@
+\set QUIET 1
+
+\pset null 'ω'
+
+-- Show how long each query takes to execute
+\timing
+
+-- Use best available output format
+\x auto
+
+\set VERBOSITY verbose
+\set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE lower
+
+\unset QUIET

@@ -1,0 +1,21 @@
+Host *
+     ControlMaster auto
+     ControlPath /tmp/%r@%h:%p
+     ControlPersist yes
+     ForwardAgent no
+     ForwardX11 no
+     ForwardX11Trusted no
+     Port 22
+     Protocol 2
+     ServerAliveInterval 15
+     ServerAliveCountMax 5
+     TCPKeepAlive no
+     UseRoaming no
+
+#Include config.d/*
+
+Host saleshub_cig_staging_deploy
+  HostName staging.upject.net
+  User saleshub_cig_deploy
+  IdentityFile ~/.ssh/saleshub.cig.staging.deploy.key
+  IdentitiesOnly yes
