@@ -634,7 +634,9 @@ syntax enable
 set background=dark
 
 "must come after vundle#end()
-colorscheme solarized
+if filereadable( expand("$HOME/.vim/bundle/vim-colors-solarized/colors/solarized.vim") )
+  colorscheme solarized
+endif
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
