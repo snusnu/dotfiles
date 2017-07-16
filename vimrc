@@ -342,7 +342,8 @@ filetype off " Vundle needs this for ftdetect to work
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kana/vim-textobj-user'
 
