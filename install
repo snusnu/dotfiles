@@ -170,6 +170,9 @@ fi
 
 customize_ruby
 
+e_header "Installing vundle (vim plugin manager) ..."
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 e_header "Bundling vim plugins ..."
 vim +PluginInstall +qall
 
