@@ -322,7 +322,7 @@ function! ToggleNumbering()
     set norelativenumber
   else
     set relativenumber
-    set nonumber
+    set number
   endif
 endfunc
 
