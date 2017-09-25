@@ -7,5 +7,4 @@
 --type-add=css=.sass,.less,.scss
 --type-set=textile=.textile
 --type-set=javascript=.coffee
---nosql
 --noxml
