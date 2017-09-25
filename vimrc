@@ -400,7 +400,7 @@ let g:airline_theme = 'solarized'
 
 " File finder
 Plugin 'ctrlpvim/ctrlp.vim'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/coverage/*,*/profiling/*,*/measurements/*,*/doc/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/coverage/*,*/profiling/*,*/measurements/*,*/doc/*
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cmd = 'CtrlP'
 
