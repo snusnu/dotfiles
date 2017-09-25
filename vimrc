@@ -445,13 +445,15 @@ let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 
 Plugin 'scrooloose/syntastic'
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_enable_balloons = 0
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 5
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_full_redraws = 1
+let g:syntastic_aggregate_errors = 1
 
 Plugin 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git' ]
