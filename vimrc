@@ -405,7 +405,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cmd = 'CtrlP'
 
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 
 Plugin 'ZoomWin'
 map <leader>z :ZoomWin<CR>
@@ -495,7 +495,7 @@ let g:html5_rdfa_attributes_complete = 0
 let g:html5_microdata_attributes_complete = 0
 let g:html5_aria_attributes_complete = 0
 
-Plugin 'mustache/vim-mode'
+Plugin 'mustache/vim-mustache-handlebars'
 let g:mustache_abbreviations = 1
 
 Plugin 'puppetlabs/puppet-syntax-vim'
