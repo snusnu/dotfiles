@@ -437,7 +437,6 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
-Plugin 'tpope/vim-pastie'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
 let g:github_token = $GITHUB_TOKEN
@@ -498,9 +497,7 @@ let g:html5_aria_attributes_complete = 0
 Plugin 'mustache/vim-mustache-handlebars'
 let g:mustache_abbreviations = 1
 
-Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'groenewege/vim-less'
-Plugin 'edsono/vim-matchit'
 
 Plugin 'godlygeek/tabular'
 vnoremap <leader>t= :Tab /=<cr>
