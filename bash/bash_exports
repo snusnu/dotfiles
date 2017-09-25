@@ -4,7 +4,7 @@
 
 export DISABLE_AUTO_TITLE=true
 
-export MYVIMRC=~/.dotfiles/vimrc
+export MYVIMRC=~/src/dotfiles/vimrc
 
 # Make vim the default editor
 export EDITOR="vim"
