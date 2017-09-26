@@ -13,7 +13,7 @@ set nowrap                           " don't wrap long lines by default
 set showbreak=↪                      " better line wraps
 set autoindent                       " for filetypes that doesn't have indent rules
 set number                           " show line numbering
-set norelativenumber                 " show absolute line numbers
+set relativenumber                   " show absolute line numbers
 set numberwidth=2                    " display 2 columns
 
 set softtabstop=2                    " soft tab width
