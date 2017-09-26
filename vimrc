@@ -355,6 +355,7 @@ let ruby_fold = 1
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'ecomba/vim-ruby-refactoring'
+Plugin 'jgdavey/vim-blockle'
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'vim-scripts/VimClojure'
