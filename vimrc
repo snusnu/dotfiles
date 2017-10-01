@@ -505,6 +505,11 @@ let g:diff_translations = 0
 cabbrev git Git
 
 Plugin 'junegunn/gv.vim'
+Plugin 'jreybert/vimagit'
+let g:magit_commit_title_limit = 72
+let g:magit_default_fold_level = 0
+let g:magit_default_sections = ['global_help', 'commit', 'staged', 'unstaged']
+
 Plugin 'wikimatze/hammer.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
