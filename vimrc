@@ -560,6 +560,9 @@ let g:yankring_replace_n_nkey = '<M-n>'
 
 Plugin 'andrewradev/splitjoin.vim'
 
+Plugin 'airblade/vim-rooter'
+let g:rooter_silent_chdir = 1
+
 
 call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
