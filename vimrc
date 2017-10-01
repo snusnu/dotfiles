@@ -501,10 +501,6 @@ autocmd User fugitive
 set diffopt+=vertical
 let g:diff_translations = 0
 
-Plugin 'gregsexton/gitv'
-let g:Gitv_OpenHorizontal = 1
-let g:Gitv_WipeAllOnClose = 1
-
 " Make fugitive and gitv easier to use
 cabbrev git Git
 
