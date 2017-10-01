@@ -441,7 +441,11 @@ vmap <C-Down> ]egv=gv
 vmap <C-Up> [egv=gv
 
 Plugin 'mileszs/ack.vim'
-map <leader>a :Ack!<Space
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
