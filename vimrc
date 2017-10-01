@@ -558,6 +558,8 @@ let g:yankring_window_use_horiz = 0
 let g:yankring_replace_n_pkey = '<M-p>'
 let g:yankring_replace_n_nkey = '<M-n>'
 
+Plugin 'andrewradev/splitjoin.vim'
+
 
 call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
