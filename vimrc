@@ -412,7 +412,11 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
 
 Plugin 'terryma/vim-multiple-cursors'
+
 Plugin 'easymotion/vim-easymotion'
+map <Leader> <Plug>(easymotion-prefix)
+nmap s <Plug>(easymotion-overwin-f2)
+let g:EasyMotion_smartcase = 1
 
 Plugin 'ZoomWin'
 map <leader>z :ZoomWin<CR>
