@@ -423,6 +423,9 @@ Plugin 'junegunn/vim-easy-align'
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
 Plugin 'ZoomWin'
 map <leader>z :ZoomWin<CR>
 
