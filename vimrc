@@ -407,8 +407,9 @@ let g:airline_theme = 'solarized'
 " File finder
 Plugin 'ctrlpvim/ctrlp.vim'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/coverage/*,*/profiling/*,*/measurements/*,*/doc/*
+let g:ctrlp_custom_ignore = '\v[\/]\.(git)$'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPMRUFiles'
 
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'easymotion/vim-easymotion'
