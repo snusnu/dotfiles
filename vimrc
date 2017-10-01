@@ -385,7 +385,6 @@ let NERDTreeIgnore=['\.rbc$', '\~$']
 
 Plugin 'scrooloose/nerdcommenter'
 
-" Airline Status bar
 Plugin 'vim-airline/vim-airline'
 "let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
