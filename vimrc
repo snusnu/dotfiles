@@ -362,6 +362,9 @@ Plugin 'vim-scripts/VimClojure'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vito-c/jq.vim'
 
+Plugin 'lifepillar/pgsql.vim'
+let g:sql_type_default = 'pgsql'
+
 " Solarized color scheme
 Plugin 'jwhitley/vim-colors-solarized'
 
