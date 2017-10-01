@@ -418,6 +418,11 @@ map <Leader> <Plug>(easymotion-prefix)
 nmap s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 
+Plugin 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 Plugin 'ZoomWin'
 map <leader>z :ZoomWin<CR>
 
