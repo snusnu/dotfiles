@@ -549,6 +549,7 @@ Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = '<M-p>' " default
 
 Plugin 'LeonB/vim-nginx'
+Plugin 'chrisbra/unicode.vim'
 
 call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
