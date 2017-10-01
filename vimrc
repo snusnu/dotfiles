@@ -504,6 +504,7 @@ let g:diff_translations = 0
 " Make fugitive and gitv easier to use
 cabbrev git Git
 
+Plugin 'junegunn/gv.vim'
 Plugin 'wikimatze/hammer.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
