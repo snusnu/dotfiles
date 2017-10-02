@@ -302,6 +302,8 @@ nnoremap <silent> <leader>uul :t.\|s/./=/\|:nohls<cr>
 " Surround the commented line with lines.
 nnoremap <silent> <leader>cul :normal "lyy"lpwv$r-^"lyyk"lP<cr>
 
+vnoremap <leader>ll :EasyAlign * /[{}]/<cr>
+
 " smart file rename
 " stolen from: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
