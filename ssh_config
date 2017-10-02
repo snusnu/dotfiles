@@ -12,10 +12,4 @@ Host *
      TCPKeepAlive no
      UseRoaming no
 
-#Include config.d/*
-
-Host saleshub_cig_staging_deploy
-  HostName staging.upject.net
-  User saleshub_cig_deploy
-  IdentityFile ~/.ssh/saleshub.cig.staging.deploy.key
-  IdentitiesOnly yes
+Include config.d/*
