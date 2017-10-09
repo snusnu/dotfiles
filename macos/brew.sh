@@ -73,6 +73,7 @@ run_brew() {
     brew cask install gpgtools
     brew cask install owasp-zap
     brew cask install macvim
+    brew cask install nvalt
 
     # Remove outdated versions from the Cellar
     brew cleanup
