@@ -189,9 +189,6 @@ noremap 0 g0
 noremap <Home> g<Home>
 noremap ^ g^
 
-" Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
-
 " The following two lines conflict with moving to top and bottom of the screen
 map <S-H> gT
 map <S-L> gt
