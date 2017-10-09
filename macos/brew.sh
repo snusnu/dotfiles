@@ -43,6 +43,7 @@ run_brew() {
     brew install chruby --HEAD
     brew install shellcheck
     brew install graphviz --with-pango
+    brew install highlight
 
     e_header "Installing homebrew casks ..."
 
