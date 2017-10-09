@@ -44,6 +44,8 @@ run_brew() {
     brew install shellcheck
     brew install graphviz --with-pango
     brew install highlight
+    brew install fzf
+    "$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-zsh --no-fish
 
     e_header "Installing homebrew casks ..."
 
