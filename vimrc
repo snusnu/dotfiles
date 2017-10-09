@@ -238,10 +238,10 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Resizing split windows
-nmap <silent> <S-Up> <C-w>-
+nmap <silent> <S-Up> <C-w>+
 nmap <silent> <S-Down> <C-w>+
-nmap <silent> <S-Left> <C-w>>
-nmap <silent> <S-Right> <C-w><
+nmap <silent> <S-Left> <C-w><
+nmap <silent> <S-Right> <C-w>>
 
 " allow moving with j/k in insert mode
 inoremap <c-j> <Down>
