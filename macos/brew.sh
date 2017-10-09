@@ -42,7 +42,7 @@ run_brew() {
     brew install ruby-install --HEAD
     brew install chruby --HEAD
     brew install shellcheck
-    brew reinstall graphviz --with-pango
+    brew install graphviz --with-pango
 
     e_header "Installing homebrew casks ..."
 
