@@ -4,7 +4,7 @@
 
 DOTFILES_DIRECTORY="$HOME/src/dotfiles"
 
-GIT_TOOLS_GIT_REMOTE="https://github.com/dkubb/git-tools"
+GIT_TOOLS_GIT_REMOTE="https://github.com/snusnu/git-tools"
 GIT_TOOLS_DIRECTORY="$HOME/src/git-tools"
 
 source ./lib/help.sh
@@ -67,10 +67,10 @@ if [[ "$initial_install" = true ]]; then
 fi
 
 if [[ ! -d $GIT_TOOLS_DIRECTORY ]]; then
-  e_header "Cloning dkubb/git-tools"
+  e_header "Cloning $GIT_TOOLS_GIT_REMOTE"
   git clone "$GIT_TOOLS_GIT_REMOTE" "$GIT_TOOLS_DIRECTORY"
 
-  e_header "Linking dkubb/git-tools scripts to /usr/local/bin"
+  e_header "Linking $GIT_TOOLS_GIT_REMOTE scripts to $HOME/bin"
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-extract-branch "$HOME"/bin/git-extract-branch
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-fix-branch     "$HOME"/bin/git-fix-branch
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-prune-all      "$HOME"/bin/git-prune-all
@@ -78,7 +78,7 @@ if [[ ! -d $GIT_TOOLS_DIRECTORY ]]; then
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-branch    "$HOME"/bin/git-push-branch
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-sync-mtime     "$HOME"/bin/git-sync-mtime
 else
-  e_header "Syncing dkubb/git-tools ..."
+  e_header "Syncing $GIT_TOOLS_GIT_REMOTE"
   pushd "$GIT_TOOLS_DIRECTORY" || exit 1
   git pull --rebase origin master
   popd || exit 1
