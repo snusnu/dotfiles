@@ -188,6 +188,11 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 e_header "Bundling vim plugins ..."
 vim +PluginInstall +qall
 
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+  e_header "Installing tpm (tmux plugin manager)"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 # Ask before potentially overwriting macOS defaults
 seek_confirmation "Warning: This step may modify your macOS system defaults."
 if is_confirmed; then
