@@ -147,6 +147,9 @@ mirrorfiles() {
 EOF
 
   link_dotfiles
+
+  source "$HOME"/.bash_profile
+
   e_success "Dotfiles update complete!"
 }
 
@@ -155,7 +158,6 @@ seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
 if is_confirmed; then
   mirrorfiles
-  source "$HOME"/.bash_profile
 else
   e_warning "Skipped syncing current dotfiles"
 fi
