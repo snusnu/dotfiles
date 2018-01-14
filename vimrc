@@ -111,9 +111,6 @@ set virtualedit=onemore              " Allow for cursor beyond last character
 "set ruler                            " Show line numbering
 "set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids"
 
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
 set laststatus=2                     " show the status line all the time
 set shell=$SHELL                     " Cause vim to spawn a login shell (will load chruby)
 
@@ -630,6 +627,11 @@ augroup misc
   " save on losing focus
   au FocusLost * :wa
 
+  autocmd WinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+
+  autocmd InsertEnter * setlocal colorcolumn=80
+  autocmd InsertLeave * setlocal colorcolumn=0
 augroup END
 
 " Commands {{{
