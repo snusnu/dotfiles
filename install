@@ -49,7 +49,7 @@ update_dotfiles() {
 
   rsync -avz --quiet "$DOTFILES_DIRECTORY"/git/gitconfig  "$HOME"/.gitconfig
 
-  tee -a "$HOME/.gitconfig" <<EOF
+  tee -a "$HOME/.gitconfig" > /dev/null <<EOF
 
 [user]
     name = $GIT_AUTHOR_NAME
