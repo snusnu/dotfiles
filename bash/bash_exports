@@ -29,8 +29,8 @@ export HISTTIMEFORMAT='%F %T '
 export LANG="en_US"
 export LC_ALL="en_US.UTF-8"
 
-# Don't clear the screen after quitting a manual page
-export MANPAGER="less -X"
+# Use a more advanced pager
+export PAGER="most"
 
 # Make new shells get the history lines from all previous
 # shells instead of the default "last window closed" history

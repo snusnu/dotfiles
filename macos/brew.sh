@@ -27,6 +27,7 @@ run_brew() {
     brew install ctags
     brew install bash
     brew install bash-completion
+    brew install most
     brew install tmux
     brew install vim --override-system-vi
     brew install python --with-brewed-openssl
