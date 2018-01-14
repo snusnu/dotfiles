@@ -518,7 +518,6 @@ Plugin 'wikimatze/hammer.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
 Plugin 'timcharper/textile.vim'
-Plugin 'zaiste/tmux.vim'
 
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'othree/html5.vim'
@@ -567,6 +566,7 @@ Plugin 'andrewradev/splitjoin.vim'
 Plugin 'airblade/vim-rooter'
 let g:rooter_silent_chdir = 1
 
+Plugin 'tmux-plugins/vim-tmux'
 
 call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
