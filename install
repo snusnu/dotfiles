@@ -68,12 +68,6 @@ mkdir -p "$HOME/.ssh/config.d"
 
 cd "$DOTFILES_DIRECTORY" || exit 1
 
-# Help text
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-  run_help
-  exit
-fi
-
 initial_install=false
 install_packages=false
 
@@ -82,6 +76,12 @@ for opt in "$@"; do
   case $opt in
     --initial-install)  initial_install=true ;;
     --install-packages) install_packages=true ;;
+
+    -h|--help)
+      run_help
+      exit
+      ;;
+
     *) e_warning "Warning: invalid option $opt" ;;
   esac
 done
