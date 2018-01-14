@@ -47,7 +47,11 @@ link_dotfiles() {
 update_dotfiles() {
   mkdir -p "$HOME/bin"
 
-  rsync -avz --quiet "$DOTFILES_DIRECTORY"/git/gitconfig  "$HOME"/.gitconfig
+  rsync \
+    -avz \
+    --quiet \
+    "$DOTFILES_DIRECTORY"/git/gitconfig \
+    "$HOME"/.gitconfig
 
   tee -a "$HOME/.gitconfig" > /dev/null <<EOF
 
