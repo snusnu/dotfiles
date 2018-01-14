@@ -567,6 +567,7 @@ Plugin 'airblade/vim-rooter'
 let g:rooter_silent_chdir = 1
 
 Plugin 'tmux-plugins/vim-tmux'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
