@@ -63,10 +63,7 @@ EOF
   e_success "Dotfiles update complete!"
 }
 
-e_header "Creating $HOME/{src,bin} directories"
 mkdir -p "$HOME"/{src,bin}
-
-e_header "Creating $HOME/.ssh/config.d/ directory"
 mkdir -p "$HOME/.ssh/config.d"
 
 cd "$DOTFILES_DIRECTORY" || exit 1
