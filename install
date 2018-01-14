@@ -12,6 +12,57 @@ source ./lib/utils.sh
 source ./lib/colors.sh
 source ./lib/ruby.sh
 
+# Force create/replace the symlink.
+link() {
+  local -r target_root=${3:-$HOME}
+
+  ln -fs "$DOTFILES_DIRECTORY/$1" "$target_root/$2"
+}
+
+# Create the necessary symbolic links between the `.dotfiles` and `HOME`
+# directory. The `bash_profile` sources other files directly from the
+# `.dotfiles` repository.
+link_dotfiles() {
+  link "bash/bashrc"       ".bashrc"
+  link "bash/bash_profile" ".bash_profile"
+  link "bash/inputrc"      ".inputrc"
+  link "bash/hushlogin"    ".hushlogin"
+  link "git/gitattributes" ".gitattributes"
+  link "git/gitignore"     ".gitignore"
+  link "ackrc"             ".ackrc"
+  link "aprc"              ".aprc"
+  link "psqlrc"            ".psqlrc"
+  link "cvsignore"         ".cvsignore"
+  link "gemrc"             ".gemrc"
+  link "irbrc"             ".irbrc"
+  link "pryrc"             ".pryrc"
+  link "ruby-version"      ".ruby-version"
+  link "tmux.conf"         ".tmux.conf"
+  link "vimrc"             ".vimrc"
+}
+
+# Copy `.gitconfig`.
+# Any global git commands in `~/.bash_profile.local` will be written to
+# `.gitconfig`. This prevents them from being committed to the repository.
+update_dotfiles() {
+  mkdir -p "$HOME/bin"
+
+  rsync -avz --quiet "$DOTFILES_DIRECTORY"/git/gitconfig  "$HOME"/.gitconfig
+
+  tee -a "$HOME/.gitconfig" <<EOF
+
+[user]
+    name = $GIT_AUTHOR_NAME
+    email = $GIT_AUTHOR_EMAIL
+EOF
+
+  link_dotfiles
+
+  source "$HOME"/.bash_profile
+
+  e_success "Dotfiles update complete!"
+}
+
 e_header "Creating $HOME/{src,bin} directories"
 mkdir -p "$HOME"/{src,bin}
 
@@ -101,57 +152,6 @@ if [[ "$install_packages" = true ]]; then
 else
   e_warning "Skipping homebrew package installations"
 fi
-
-# Force create/replace the symlink.
-link() {
-  local -r target_root=${3:-$HOME}
-
-  ln -fs "$DOTFILES_DIRECTORY/$1" "$target_root/$2"
-}
-
-# Create the necessary symbolic links between the `.dotfiles` and `HOME`
-# directory. The `bash_profile` sources other files directly from the
-# `.dotfiles` repository.
-link_dotfiles() {
-  link "bash/bashrc"       ".bashrc"
-  link "bash/bash_profile" ".bash_profile"
-  link "bash/inputrc"      ".inputrc"
-  link "bash/hushlogin"    ".hushlogin"
-  link "git/gitattributes" ".gitattributes"
-  link "git/gitignore"     ".gitignore"
-  link "ackrc"             ".ackrc"
-  link "aprc"              ".aprc"
-  link "psqlrc"            ".psqlrc"
-  link "cvsignore"         ".cvsignore"
-  link "gemrc"             ".gemrc"
-  link "irbrc"             ".irbrc"
-  link "pryrc"             ".pryrc"
-  link "ruby-version"      ".ruby-version"
-  link "tmux.conf"         ".tmux.conf"
-  link "vimrc"             ".vimrc"
-}
-
-# Copy `.gitconfig`.
-# Any global git commands in `~/.bash_profile.local` will be written to
-# `.gitconfig`. This prevents them from being committed to the repository.
-update_dotfiles() {
-  mkdir -p "$HOME/bin"
-
-  rsync -avz --quiet "$DOTFILES_DIRECTORY"/git/gitconfig  "$HOME"/.gitconfig
-
-  tee -a "$HOME/.gitconfig" <<EOF
-
-[user]
-    name = $GIT_AUTHOR_NAME
-    email = $GIT_AUTHOR_EMAIL
-EOF
-
-  link_dotfiles
-
-  source "$HOME"/.bash_profile
-
-  e_success "Dotfiles update complete!"
-}
 
 # Ask before potentially overwriting files
 seek_confirmation "Warning: This step may overwrite your existing dotfiles."
