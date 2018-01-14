@@ -34,7 +34,7 @@ for opt in "$@"; do
   case $opt in
     --initial-install)  initial_install=true ;;
     --install-packages) install_packages=true ;;
-    -*|--*) e_warning "Warning: invalid option $opt" ;;
+    *) e_warning "Warning: invalid option $opt" ;;
   esac
 done
 
