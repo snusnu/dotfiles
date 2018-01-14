@@ -23,6 +23,21 @@ link() {
 # directory. The `bash_profile` sources other files directly from the
 # `.dotfiles` repository.
 link_dotfiles() {
+  mkdir -p "$HOME/bin"
+
+  rsync \
+    -avz \
+    --quiet \
+    "$DOTFILES_DIRECTORY"/git/gitconfig \
+    "$HOME"/.gitconfig
+
+  tee -a "$HOME/.gitconfig" > /dev/null <<EOF
+
+[user]
+    name = $GIT_AUTHOR_NAME
+    email = $GIT_AUTHOR_EMAIL
+EOF
+
   link "bash/bashrc"       ".bashrc"
   link "bash/bash_profile" ".bash_profile"
   link "bash/inputrc"      ".inputrc"
@@ -39,32 +54,12 @@ link_dotfiles() {
   link "ruby-version"      ".ruby-version"
   link "tmux.conf"         ".tmux.conf"
   link "vimrc"             ".vimrc"
-}
 
-# Copy `.gitconfig`.
-# Any global git commands in `~/.bash_profile.local` will be written to
-# `.gitconfig`. This prevents them from being committed to the repository.
-update_dotfiles() {
-  mkdir -p "$HOME/bin"
-
-  rsync \
-    -avz \
-    --quiet \
-    "$DOTFILES_DIRECTORY"/git/gitconfig \
-    "$HOME"/.gitconfig
-
-  tee -a "$HOME/.gitconfig" > /dev/null <<EOF
-
-[user]
-    name = $GIT_AUTHOR_NAME
-    email = $GIT_AUTHOR_EMAIL
-EOF
-
-  link_dotfiles
+  link_git_tools
 
   source "$HOME"/.bash_profile
 
-  e_success "Dotfiles update complete!"
+  e_success "Successfully (re)linked all dotfiles and git-tools"
 }
 
 link_git_tools() {
@@ -90,6 +85,11 @@ for opt in "$@"; do
   case $opt in
     --initial-install)  initial_install=true ;;
     --install-packages) install_packages=true ;;
+
+    --link-dotfiles)
+      link_dotfiles
+      exit $?
+      ;;
 
     --link-git-tools)
       link_git_tools
