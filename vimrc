@@ -449,6 +449,11 @@ nnoremap <Leader>a :Ack!<Space>
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-surround'
+
+Plugin 'tpope/vim-obsession'
+let g:airline#extensions#obsession#enabled = 1
+let g:airline#extensions#obsession#indicator_text = '$'
+
 Plugin 'majutsushi/tagbar'
 Plugin 'sickill/vim-pasta'
 let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'haskell', 'tagbar' ]
