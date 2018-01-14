@@ -134,7 +134,7 @@ link_dotfiles() {
 # Copy `.gitconfig`.
 # Any global git commands in `~/.bash_profile.local` will be written to
 # `.gitconfig`. This prevents them from being committed to the repository.
-mirrorfiles() {
+update_dotfiles() {
   mkdir -p "$HOME/bin"
 
   rsync -avz --quiet "$DOTFILES_DIRECTORY"/git/gitconfig  "$HOME"/.gitconfig
@@ -157,7 +157,7 @@ EOF
 seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
 if is_confirmed; then
-  mirrorfiles
+  update_dotfiles
 else
   e_warning "Skipped syncing current dotfiles"
 fi
