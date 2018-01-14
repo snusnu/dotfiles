@@ -67,6 +67,16 @@ EOF
   e_success "Dotfiles update complete!"
 }
 
+link_git_tools() {
+  e_header "Linking $GIT_TOOLS_GIT_REMOTE scripts to $HOME/bin"
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-extract-branch "$HOME"/bin/git-extract-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-fix-branch     "$HOME"/bin/git-fix-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-prune-all      "$HOME"/bin/git-prune-all
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each      "$HOME"/bin/git-push-each
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-branch    "$HOME"/bin/git-push-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-sync-mtime     "$HOME"/bin/git-sync-mtime
+}
+
 mkdir -p "$HOME"/{src,bin}
 mkdir -p "$HOME/.ssh/config.d"
 
@@ -80,6 +90,11 @@ for opt in "$@"; do
   case $opt in
     --initial-install)  initial_install=true ;;
     --install-packages) install_packages=true ;;
+
+    --link-git-tools)
+      link_git_tools
+      exit $?
+      ;;
 
     -h|--help)
       run_help
@@ -119,14 +134,7 @@ fi
 if [[ ! -d $GIT_TOOLS_DIRECTORY ]]; then
   e_header "Cloning $GIT_TOOLS_GIT_REMOTE"
   git clone "$GIT_TOOLS_GIT_REMOTE" "$GIT_TOOLS_DIRECTORY"
-
-  e_header "Linking $GIT_TOOLS_GIT_REMOTE scripts to $HOME/bin"
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-extract-branch "$HOME"/bin/git-extract-branch
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-fix-branch     "$HOME"/bin/git-fix-branch
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-prune-all      "$HOME"/bin/git-prune-all
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each      "$HOME"/bin/git-push-each
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-branch    "$HOME"/bin/git-push-branch
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-sync-mtime     "$HOME"/bin/git-sync-mtime
+  link_git_tools
 else
   e_header "Syncing $GIT_TOOLS_GIT_REMOTE"
   pushd "$GIT_TOOLS_DIRECTORY" || exit 1
