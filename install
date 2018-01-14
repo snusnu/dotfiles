@@ -71,10 +71,12 @@ if [[ ! -d $GIT_TOOLS_DIRECTORY ]]; then
   git clone "$GIT_TOOLS_GIT_REMOTE" "$GIT_TOOLS_DIRECTORY"
 
   e_header "Linking dkubb/git-tools scripts to /usr/local/bin"
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-fix-branch "$HOME"/bin/git-fix-branch
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-prune-all  "$HOME"/bin/git-prune-all
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each  "$HOME"/bin/git-push-each
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each  "$HOME"/bin/git-sync-mtime
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-extract-branch "$HOME"/bin/git-extract-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-fix-branch     "$HOME"/bin/git-fix-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-prune-all      "$HOME"/bin/git-prune-all
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each      "$HOME"/bin/git-push-each
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-branch    "$HOME"/bin/git-push-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/git-sync-mtime     "$HOME"/bin/git-sync-mtime
 else
   e_header "Syncing dkubb/git-tools ..."
   pushd "$GIT_TOOLS_DIRECTORY" || exit 1
