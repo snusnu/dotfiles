@@ -7,14 +7,14 @@ load_dotfiles() {
   declare -a files=(
     /usr/local/share/chruby/chruby.sh     # Enable postmodern/chruby
     /usr/local/share/chruby/auto.sh       # Enable autoswitching of rubies
-    $dotfiles_directory/lib/colors.sh     # Solarized colors
-    $dotfiles_directory/bash/bash_options # Options
-    $dotfiles_directory/bash/bash_exports # Exports
-    $dotfiles_directory/bash/bash_aliases # Aliases
-    $HOME/.iterm2_shell_integration.bash  # Activate iTerm2 shell extensions
-    $HOME/.bash_profile.local             # Local and private settings not under version control (e.g. git credentials)
-    $dotfiles_directory/bash/bash_paths   # Path modifications (must source after `.bash_profile.local` in case of custom `brew` location)
-    $dotfiles_directory/bash/bash_prompt  # Custom bash prompt
+    "$dotfiles_directory"/lib/colors.sh     # Solarized colors
+    "$dotfiles_directory"/bash/bash_options # Options
+    "$dotfiles_directory"/bash/bash_exports # Exports
+    "$dotfiles_directory"/bash/bash_aliases # Aliases
+    "$HOME"/.iterm2_shell_integration.bash  # Activate iTerm2 shell extensions
+    "$HOME"/.bash_profile.local             # Local and private settings not under version control (e.g. git credentials)
+    "$dotfiles_directory"/bash/bash_paths   # Path modifications (must source after `.bash_profile.local` in case of custom `brew` location)
+    "$dotfiles_directory"/bash/bash_prompt  # Custom bash prompt
   )
 
   # if these files are readable, source them
