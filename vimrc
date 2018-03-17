@@ -249,9 +249,6 @@ inoremap <c-k> <Up>
 inoremap <c-h> <Left>
 inoremap <c-l> <Right>
 
-" Rebuild CTags
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
-
 " Fast editing of the .vimrc
 nmap <silent> <leader>c :edit $MYVIMRC<CR>
 
