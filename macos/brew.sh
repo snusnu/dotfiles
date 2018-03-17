@@ -22,6 +22,7 @@ run_brew() {
     brew install tree
     brew install wget --enable-iri
     brew install git
+    brew install diff-so-fancy
     brew install rsync
     brew install ack
     brew install ctags
