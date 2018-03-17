@@ -620,7 +620,7 @@ augroup misc
       call Preserve("%s/\\s\\+$//e")
   endfunction
 
-  au BufWritePre *.rb,*.ms,*.html,*.js,*.ru,*.rake,*.md,*.py,*.js,*.md,*.hs,vimrc :call StripTrailingWhitespace()
+  au BufWritePre *.rb,*.ms,*.html,*.js,*.ru,*.rake,*.md,*.py,*.js,*.md,*.hs,vimrc,*.sql :call StripTrailingWhitespace()
 
   " Don't treat json as javascript
   autocmd BufRead,BufNewFile *.json set filetype=json
