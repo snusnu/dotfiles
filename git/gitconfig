@@ -43,10 +43,10 @@
 
 [core]
     # Use custom `.gitignore` and `.gitattributes`
-    excludesfile = ~/.gitignore
+    excludesfile   = ~/.gitignore
     attributesfile = ~/.gitattributes
-    autocrlf = input
-    safecrlf = true
+    autocrlf       = input
+    safecrlf       = true
 
 [credential]
     helper = osxkeychain
