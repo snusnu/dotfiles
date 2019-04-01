@@ -486,22 +486,22 @@ let g:signify_sign_overwrite = 0
 let g:signify_cursorhold_normal = 1
 
 Plugin 'tpope/vim-fugitive'
-nmap <leader>gw :Gwrite<CR>
-nmap <leader>gs :Gstatus<CR>
-nmap <leader>gc :Gcommit -v<CR>
-nmap <leader>ga :Gcommit --amend<CR>
-nmap <leader>gd :Gdiff<CR>
-autocmd BufReadPost fugitive://* set bufhidden=delete
-autocmd User fugitive
-  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-  \   nnoremap <buffer> .. :edit %:h<CR> |
-  \ endif
+" nmap <leader>gw :Gwrite<CR>
+" nmap <leader>gs :Gstatus<CR>
+" nmap <leader>gc :Gcommit -v<CR>
+" nmap <leader>ga :Gcommit --amend<CR>
+" nmap <leader>gd :Gdiff<CR>
+" autocmd BufReadPost fugitive://* set bufhidden=delete
+" autocmd User fugitive
+"   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+"   \   nnoremap <buffer> .. :edit %:h<CR> |
+"   \ endif
 
-set diffopt+=vertical
-let g:diff_translations = 0
+" set diffopt+=vertical
+" let g:diff_translations = 0
 
 " Make fugitive and gitv easier to use
-cabbrev git Git
+" cabbrev git Git
 
 Plugin 'junegunn/gv.vim'
 Plugin 'jreybert/vimagit'
