@@ -1,0 +1,12 @@
+#!/bin/bash
+
+pg_data_dir_name=${1-postgres}
+
+pushd /usr/local/var/"$pg_data_dir_name"/
+openssl req -nodes -newkey rsa:2048 -keyout server.key -out server.req -subj "/C=US/ST=Oregon/L=Eugene/O=Example/OU=IT Department/CN=localhost"
+openssl req -x509 -in server.req -key server.key -out server.crt -days 365
+cat server.crt | sudo tee -a ~/.postgresql/root.crt
+chmod 0400 server.crt server.key server.req ~/.postgresql/root.crt
+pg_ctl -D /usr/local/var/"$pg_data_dir_name" restart
+openssl x509 -enddate -noout -in /usr/local/var/postgres/server.crt
+popd
