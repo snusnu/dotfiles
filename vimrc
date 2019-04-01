@@ -249,6 +249,9 @@ inoremap <c-k> <Up>
 inoremap <c-h> <Left>
 inoremap <c-l> <Right>
 
+map <leader>rt <Plug>SendTestToTmux
+map <leader>rT <Plug>SendFocusedTestToTmux
+
 " Fast editing of the .vimrc
 nmap <silent> <leader>c :edit $MYVIMRC<CR>
 
@@ -363,6 +366,9 @@ Plugin 'vito-c/jq.vim'
 
 Plugin 'lifepillar/pgsql.vim'
 let g:sql_type_default = 'pgsql'
+
+Plugin 'krisajenkins/vim-pipe'
+Plugin 'krisajenkins/vim-postgresql-syntax'
 
 " Solarized color scheme
 Plugin 'jwhitley/vim-colors-solarized'
@@ -561,8 +567,115 @@ Plugin 'andrewradev/splitjoin.vim'
 Plugin 'airblade/vim-rooter'
 let g:rooter_silent_chdir = 1
 
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-projectionist'
+"Plugin 'tpope/vim-rails'
+
+let g:gem_projections = {
+  \ "devtools": {
+  \   "app/controllers/*.rb": {
+  \     "type": "controller",
+  \     "alternate": "spec/unit/controllers/{}_spec.rb"
+  \   },
+  \   "app/decorators/*.rb": {
+  \     "type": "decorator",
+  \     "alternate": "spec/unit/decorators/{}_spec.rb"
+  \   },
+  \   "app/forms/*.rb": {
+  \     "type": "form",
+  \     "alternate": "spec/unit/form/{}_spec.rb"
+  \   },
+  \   "app/helpers/*.rb": {
+  \     "type": "helper",
+  \     "alternate": "spec/unit/helpers/{}_spec.rb"
+  \   },
+  \   "app/mailers/*.rb": {
+  \     "type": "mailer",
+  \     "alternate": "spec/unit/mailers/{}_spec.rb"
+  \   },
+  \   "app/models/*.rb": {
+  \     "type": "model",
+  \     "alternate": "spec/unit/models/{}_spec.rb"
+  \   },
+  \   "app/responders/*.rb": {
+  \     "type": "responder",
+  \     "alternate": "spec/unit/responders/{}_spec.rb"
+  \   },
+  \   "lib/*.rb": {
+  \     "type": "lib",
+  \     "alternate": "spec/unit/lib/{}_spec.rb"
+  \   },
+  \   "spec/unit/controllers/*_spec.rb": {
+  \     "type": "controller",
+  \     "alternate": "app/controllers/{}.rb"
+  \   },
+  \   "spec/unit/decorators/*_spec.rb": {
+  \     "type": "decorator",
+  \     "alternate": "app/decorators/{}.rb"
+  \   },
+  \   "spec/unit/form/*_spec.rb": {
+  \     "type": "form",
+  \     "alternate": "app/forms/{}.rb"
+  \   },
+  \   "spec/unit/helpers/*_spec.rb": {
+  \     "type": "helper",
+  \     "alternate": "app/helpers/{}.rb"
+  \   },
+  \   "spec/unit/lib/*_spec.rb": {
+  \     "type": "lib",
+  \     "alternate": "lib/{}.rb"
+  \   },
+  \   "spec/unit/mailers/*_spec.rb": {
+  \     "type": "mailer",
+  \     "alternate": "app/mailers/{}.rb"
+  \   },
+  \   "spec/unit/models/*_spec.rb": {
+  \     "type": "model",
+  \     "alternate": "app/models/{}.rb"
+  \   },
+  \   "spec/unit/responders/*_spec.rb": {
+  \     "type": "responder",
+  \     "alternate": "app/responders/{}.rb"
+  \   }
+  \ }}
+
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+
+Plugin 'benmills/vimux'
+
+let g:VimuxOrientation = "v"
+let g:VimuxHeight = "40"
+let g:VimuxUseNearest = 0
+
+" Prompt for a command to run map
+map <Leader>vp :VimuxPromptCommand<CR>
+
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+
+" Inspect runner pane map
+map <Leader>vi :VimuxInspectRunner<CR>
+
+" Close vim tmux runner opened by VimuxRunCommand
+map <Leader>vq :VimuxCloseRunner<CR>
+
+" Interrupt any command running in the runner pane map
+map <Leader>vs :VimuxInterruptRunner<CR>
+
+" Clear the tmux history of the runner pane
+map <Leader>vc :VimuxClearRunnerHistory<CR>
+
+" Zoom the tmux runner page
+map <Leader>vz :VimuxZoomRunner<CR>
+
+Plugin 'jgdavey/vim-turbux'
+let g:turbux_runner  = 'vimux'
+let g:turbux_command_prefix = 'bundle exec'
+let g:turbux_command_rspec  = 'rspec'
+
+Plugin 'christoomey/vim-sort-motion'
 
 call vundle#end()
 filetype plugin indent on " enable indendation/internal plugins after Vundle
@@ -627,6 +740,12 @@ augroup misc
 
   " save on losing focus
   au FocusLost * :wa
+
+  " Use psql for sql vim pipes
+  autocmd FileType sql :let b:vimpipe_command="psql"
+
+  " Highlight postgres output
+  autocmd FileType sql :let b:vimpipe_filetype="postgresql"
 
   autocmd WinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
