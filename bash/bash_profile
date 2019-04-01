@@ -5,8 +5,6 @@ load_dotfiles() {
   local -r dotfiles_directory=${1:-"$HOME/src/dotfiles"}
 
   declare -a files=(
-    /usr/local/share/chruby/chruby.sh     # Enable postmodern/chruby
-    /usr/local/share/chruby/auto.sh       # Enable autoswitching of rubies
     "$dotfiles_directory"/lib/colors.sh     # Solarized colors
     "$dotfiles_directory"/bash/bash_options # Options
     "$dotfiles_directory"/bash/bash_exports # Exports
