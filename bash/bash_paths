@@ -5,8 +5,17 @@
 # Directories to be prepended to PATH
 declare -a dirs_to_prepend=(
   "$HOME/.local/bin"
-  "$HOME/Library/Python/3.6/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/Library/Python/3.7/bin"
+  "/usr/local/opt/ruby@2.5/bin"
+  "/usr/local/lib/ruby/gems/2.5.0/bin"
+  "/usr/local/opt/bison/bin"
+  "/usr/local/opt/icu4c/bin"
+  "/usr/local/opt/icu4c/sbin"
+  "/usr/local/opt/openssl/bin"
+  "/usr/local/opt/sqlite/bin"
   "/usr/local/bin" # Ensure that this bin always takes precedence over `/usr/bin`
+  "/usr/local/opt/icu4c/sbin"
   "/usr/local/sbin"
 )
 
