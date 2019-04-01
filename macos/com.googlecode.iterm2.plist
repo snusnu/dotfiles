@@ -22,6 +22,8 @@
 	<false/>
 	<key>DisableFullscreenTransparency</key>
 	<true/>
+	<key>DisableMetalWhenIdle</key>
+	<true/>
 	<key>DoubleReportScrollWheel</key>
 	<true/>
 	<key>GlobalKeyMap</key>
@@ -191,9 +193,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 382 620 392 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>134 1452 796 473 -603 900 2560 1440 </string>
+	<string>133 1508 796 486 -603 900 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>43 85 1333 792 0 0 1440 877 </string>
+	<string>-490 1048 564 452 -603 900 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>-121 911 2548 1429 -603 900 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1018,7 +1020,7 @@
 				<real>0.74176257848739624</real>
 			</dict>
 			<key>BM Growl</key>
-			<true/>
+			<false/>
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1470,7 +1472,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -1517,6 +1519,8 @@
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
+	<key>OpenTmuxWindowsIn</key>
+	<integer>0</integer>
 	<key>PerformDNSLookups</key>
 	<false/>
 	<key>PerformDictionaryLookupOnQuickLook</key>
@@ -1569,7 +1573,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-03-16T14:49:30Z</date>
+	<date>2019-04-01T13:13:18Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1588,7 +1592,9 @@
 	<integer>2</integer>
 	<key>UseBorder</key>
 	<false/>
+	<key>UseMetal</key>
+	<true/>
 	<key>iTerm Version</key>
-	<string>3.1.5</string>
+	<string>3.2.8</string>
 </dict>
 </plist>
