@@ -54,6 +54,7 @@ EOF
   link "ruby-version"      ".ruby-version"
   link "tmux.conf"         ".tmux.conf"
   link "vimrc"             ".vimrc"
+  link "init.vim"          ".config/nvim/init.vim"
 
   link_git_tools
 
