@@ -9,7 +9,7 @@
 "\e[C": forward-char
 "\e[D": backward-char
 
-# Try to stay at the same the cursor position when moving through the history.
+# Try to stay at the same cursor position when moving through the history.
 set history-preserve-point on
 
 # Never ring any sort of bell during line reading
