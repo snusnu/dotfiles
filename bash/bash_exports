@@ -30,7 +30,7 @@ export LANG="en_US"
 export LC_ALL="en_US.UTF-8"
 
 # Use a more advanced pager
-export PAGER="most"
+export PAGER="less"
 
 # Make new shells get the history lines from all previous
 # shells instead of the default "last window closed" history
@@ -38,47 +38,3 @@ export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto"
-
-# Configure junegunn/fzf to use ripgrep
-#
-# --files:     List files that would be searched but do not search
-# --no-ignore: Do not respect .gitignore, etc...
-# --hidden:    Search hidden files and folders
-# --follow:    Follow symlinks
-# --glob:      Additional conditions for search
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-
-_gen_fzf_default_opts() {
-  local base03="234"
-  local base02="235"
-  local base01="240"
-  local base00="241"
-  local base0="244"
-  local base1="245"
-  local base2="254"
-  local base3="230"
-  local yellow="136"
-  local orange="166"
-  local red="160"
-  local magenta="125"
-  local violet="61"
-  local blue="33"
-  local cyan="37"
-  local green="64"
-
-  export FZF_DEFAULT_OPTS="
-    --height 40%
-    --reverse
-    --border
-    --multi
-    --no-hscroll
-    --tabstop=2
-    --cycle
-    --inline-info
-    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-  "
-}
-_gen_fzf_default_opts
-
-unset _g_fzg_default_opts

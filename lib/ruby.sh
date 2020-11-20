@@ -1,9 +1,7 @@
 #!/bin/bash
 
 customize_ruby() {
-  e_header "Installing ruby along with gems ..."
-
-  chruby 2.5.3
+  chruby 2.6.6
 
   gem install \
     bundler \

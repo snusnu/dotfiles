@@ -4,13 +4,12 @@
 
 DOTFILES_DIRECTORY="$HOME/src/dotfiles"
 
-GIT_TOOLS_GIT_REMOTE="https://github.com/snusnu/git-tools"
+GIT_TOOLS_GIT_REMOTE="https://github.com/dkubb/git-tools"
 GIT_TOOLS_DIRECTORY="$HOME/src/git-tools"
 
 source ./lib/help.sh
 source ./lib/utils.sh
 source ./lib/colors.sh
-source ./lib/ruby.sh
 
 # Force create/replace the symlink.
 link() {
@@ -65,12 +64,20 @@ EOF
 
 link_git_tools() {
   e_header "Linking $GIT_TOOLS_GIT_REMOTE scripts to $HOME/bin"
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-extract-branch "$HOME"/bin/git-extract-branch
+  ln -fs "$GIT_TOOLS_DIRECTORY"/strict-mode.sh     "$HOME"/bin/strict-mode.sh
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-fix-branch     "$HOME"/bin/git-fix-branch
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-prune-all      "$HOME"/bin/git-prune-all
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-each      "$HOME"/bin/git-push-each
-  ln -fs "$GIT_TOOLS_DIRECTORY"/git-push-branch    "$HOME"/bin/git-push-branch
   ln -fs "$GIT_TOOLS_DIRECTORY"/git-sync-mtime     "$HOME"/bin/git-sync-mtime
+}
+
+# Copy `.gitconfig`.
+# Any global git commands in `~/.bash_profile.local` will be written to
+# `.gitconfig`. This prevents them from being committed to the repository.
+update_dotfiles() {
+  rsync -avz --quiet "$DOTFILES_DIRECTORY"/git/gitconfig "$HOME"/.gitconfig
+  link_dotfiles
+  e_success "Dotfiles update complete!"
 }
 
 mkdir -p "$HOME"/{src,bin}
@@ -136,29 +143,12 @@ if [[ ! -d $GIT_TOOLS_DIRECTORY ]]; then
   e_header "Cloning $GIT_TOOLS_GIT_REMOTE"
   git clone "$GIT_TOOLS_GIT_REMOTE" "$GIT_TOOLS_DIRECTORY"
   link_git_tools
-else
-  e_header "Syncing $GIT_TOOLS_GIT_REMOTE"
-  pushd "$GIT_TOOLS_DIRECTORY" || exit 1
-  git pull --rebase origin master
-  popd || exit 1
 fi
 
 # Install and update packages
 if [[ "$install_packages" = true ]]; then
-  source ./macos/brew.sh
-
   e_header "Installing homebrew packages ..."
-  run_brew
-
-  # Enable htop
-  sudo chown root:wheel /usr/local/Cellar/htop-osx/0.8.2.2/bin/htop
-  sudo chmod u+s /usr/local/Cellar/htop-osx/0.8.2.2/bin/htop
-
-  # Initialize postgres
-  initdb /usr/local/var/postgres -E utf8
-  ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-
+  brew bundle --file ./macos/Brewfile
 else
   e_warning "Skipping homebrew package installations"
 fi
@@ -181,13 +171,12 @@ if [[ "$install_packages" = true ]]; then
   sudo bash -c "echo \"/usr/local/bin/bash\" >> /etc/shells"
 fi
 
-customize_ruby
-
 e_header "Installing vundle (vim plugin manager) ..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-e_header "Bundling vim plugins ..."
+e_header "Bundling vim and nvim plugins ..."
 vim +PluginInstall +qall
+nvim +PlugInstall +qall
 
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   e_header "Installing tpm (tmux plugin manager)"
@@ -200,8 +189,6 @@ if is_confirmed; then
   source "$DOTFILES_DIRECTORY"/macos/customize.sh
 
   [ "$initial_install" = true ] && customize_macos_host
-
-  customize_macos
 
   e_success "macos settings updated! You may need to restart."
 else

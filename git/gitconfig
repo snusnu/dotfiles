@@ -24,6 +24,59 @@
     # Custom graph log for all branches
     grapha = log --pretty=nice --date-order --graph --all
 
+    b      = co -
+    d      = branch -D
+    f      = fetch
+    aa     = add .
+    bn     = !git rev-parse --abbrev-ref HEAD
+    co     = checkout
+    fb     = !FILTER_BRANCH_SQUELCH_WARNING=1 git fix-branch
+    fd     = !git rexec 'git camf --date=now && sleep 1'
+    fm     = fetch origin master:master
+    pu     = !git fm && git fb "$(git rbn)" && git push-each "$(git rbn)"
+    pe     = !git fm && git fb && git push-each
+    pf     = !git push --force origin "$(git bn)"
+    rc     = rebase --continue
+    ri     = rebase --interactive
+    arc    = !git aa && git rc
+    cam    = commit --amend
+    cob    = checkout -b
+    com    = commit
+    dii    = diff
+    dis    = diff --cached
+    fdm    = !git rime 'git camf --date=now && sleep 1' && git fb
+    fix    = commit --edit -m 'fixup!'
+    wip    = commit --edit -m '[WIP]'
+    pui    = !git push --set-upstream origin "$(git bn)"
+    rim    = ri master
+    rip    = ri @{-1}
+    rbn    = !printf '%s' $(git config -- branch."$(git bn)".remote)/"$(git bn)"
+    acam   = !git aa && git cam
+    afix   = !git aa && git fix
+    awip   = !git aa && git wip
+    camf   = cam --no-edit
+    camo   = commit --reuse-message=ORIG_HEAD
+    coma   = !git aa && git commit
+    fixa   = !git rsoft && git acamf
+    rhup   = !git f && git rhard @{upstream}
+    rima   = ri master^
+    rime   = rim --exec
+    acamf  = !git aa && git camf
+    acamo  = !git aa && git camo
+    redit  = !git rebase --edit-todo
+    rexec  = rebase --exec
+    rhard  = reset --hard
+    rimae  = rima --exec
+    rskip  = rebase --skip
+    rsoft  = reset head^
+    astash = !git aa && git stash
+    rabort = rebase --abort
+    reditc = !git redit && git rc
+    stasha = stash apply
+
+    # Oneline log since master
+    logm = log --oneline master...
+
     # Custom pretty log
     logp = log --pretty=nice --date-order
 
@@ -50,37 +103,52 @@
     attributesfile = ~/.gitattributes
     autocrlf       = input
     safecrlf       = true
-    pager          = "diff-so-fancy | less --tabs=4 -RFX"
+    pager          = delta --theme='Solarized (light)'
+
+[interactive]
+    diffFilter = delta --color-only
 
 [credential]
     helper = osxkeychain
 
 [diff]
-    tool = vimdiff
+    tool = diff
 
     # diff-so-fancy
-    meta       = "yellow"
-    frag       = "magenta bold"
-    commit     = "yellow bold"
-    old        = "red bold"
-    new        = "green bold"
-    whitespace = "red reverse"
+    ;meta       = "yellow"
+    ;frag       = "magenta bold"
+    ;commit     = "yellow bold"
+    ;old        = "red bold"
+    ;new        = "green bold"
+    ;whitespace = "red reverse"
 
-[diff-highlight]
-    # diff-so-fancy
-    oldNormal    = "red bold"
-    oldHighlight = "red bold 52"
-    newNormal    = "green bold"
-    newHighlight = "green bold 22"
+# [diff-highlight]
+#     # diff-so-fancy
+#     oldNormal    = "red bold"
+#     oldHighlight = "red bold 52"
+#     newNormal    = "green bold"
+#     newHighlight = "green bold 22"
 
 [difftool]
     prompt = false
 
-[pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+[merge]
+    conflictStyle = diff3
+
+[mergetool]
+    cmd           = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+    keepBackup    = false
+    prompt        = false
+    trustExitCode = true
+
+;[pager]
+    ;diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 
 [pretty]
     # tut: http://gitimmersion.com/lab_10.html
     # ref: http://linux.die.net/man/1/git-log
     # Result: <short-sha> <commit-message> (<pointer-names>) -- <commit-author-name>; <relative-time>
     nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
+
+[status]
+    showUntrackedFiles = all

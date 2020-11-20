@@ -13,6 +13,7 @@ load_dotfiles() {
     "$HOME"/.bash_profile.local             # Local and private settings not under version control (e.g. git credentials)
     "$dotfiles_directory"/bash/bash_paths   # Path modifications (must source after `.bash_profile.local` in case of custom `brew` location)
     "$dotfiles_directory"/bash/bash_prompt  # Custom bash prompt
+    "$dotfiles_directory"/lib/fzf.sh        # fzf customization
   )
 
   # if these files are readable, source them
@@ -35,5 +36,8 @@ load_dotfiles() {
 }
 
 load_dotfiles "$HOME/src/dotfiles"
+
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
 
 unset load_dotfiles

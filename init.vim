@@ -1,100 +1,96 @@
 " vim:fdm=marker:fdl=0:nofoldenable
 
-" Martin (snusnu) Gamsjaeger's init.vim
-" http://github.com/snusnu
+syntax on
+filetype plugin indent on
 
-set nocompatible                     " turn off compatibility with Vi
-set termguicolors
-set magic                            " Enable extended regexp
-set hidden                           " allow buffer switching without saving
-set nowrap                           " don't wrap long lines by default
-set showbreak=↪                      " better line wraps
 set autoindent                       " for filetypes that doesn't have indent rules
-set number                           " show line numbering
-set norelativenumber                 " show absolute line numbers
-set numberwidth=2                    " display 2 columns
-set softtabstop=2                    " soft tab width
-set tabstop=2                        " global tab width
-set shiftwidth=2                     " number of spaces for (un)indenting
-set shiftround                       " round indent to multiple of 'shiftwidth'
-set expandtab                        " expand tab characters into spaces
-set nojoinspaces                     " prevent inserting two spaces after punctuation on a join (J)"
-set hlsearch                         " highlight matches...
-set incsearch                        " ...as you type.
-set ignorecase                       " case insensitive search
-set smartcase                        " ...only when pattern is all lowercase
-set nobackup                         " don't make a backup before overwriting a file.
-set nowritebackup                    " ^^^
-set noswapfile                       " don't need no stinky swapfiles
-set directory=~/tmp,/tmp             " keep swap files in one location
-set confirm                          " confirm on quit, etc.
 set autoread                         " automatically read changes from disk
-set showcmd                          " display incomplete commands.
-set showmatch                        " when a bracket is inserted, briefly jump to the matching one
-set history=1000                     " remember more commands and search history
-set undolevels=1000                  " remember more undo steps
-set undoreload=10000                 " Maximum number lines to save for undo on a buffer reload
-set undodir=~/.vim/.undo              " directory where undo files are stored
-set undofile                         " undo previous actions even after you close and reopen a file.
+set background=dark                  " Use dark theme by default
 set backspace=indent,eol,start       " intuitive backspacing (over everything in insert mode)
-set virtualedit=block                " allow virtual editing in Visual block mode
+set complete=.,w,b,u,U               " . scan the current buffer ( 'wrapscan' is ignored)
+                                     " w scan buffers from other windows
+                                     " b scan other loaded buffers that are in the buffer list
+                                     " u scan the unloaded buffers that are in the buffer list
+                                     " U scan the buffers that are not in the buffer list
+set confirm                          " confirm on quit, etc.
+set directory=~/tmp,/tmp             " keep swap files in one location
+set encoding=utf-8                   " Use utf-8 encoding
+set expandtab                        " expand tab characters into spaces
+set fileencodings=                   " don't do any encoding conversion (otherwise munges binary files)
+set foldlevel=3
 set foldmethod=syntax                " folding based on syntax
 set foldnestmax=3                    " deepest fold is 3 levels
-set foldlevel=3
-set nofoldenable                     " dont fold by default
 set gdefault                         " this makes search/replace global by default
-set switchbuf=useopen                " Switch to an existing buffer if one exists
-set wildmenu                         " enable ctrl-n and ctrl-p to scroll thru matches
-set wildmode=list:longest,full       " make cmdline tab completion similar to bash
+set hidden                           " allow buffer switching without saving
+set history=1000                     " remember more commands and search history
+set hlsearch                         " highlight matches...
+set ignorecase                       " case insensitive search
+set inccommand=nosplit
+set incsearch                        " ...as you type.
+set laststatus=2                     " show the status line all the time
+set lazyredraw                       " Don't redraw the screen during complex operations
+set linespace=0                      " No extra spaces between rows
 set list                             " show trailing whitespace etc
 set listchars=tab:»\ ,trail:•,nbsp:· " highlight problematic whitespace
-set linespace=0                      " No extra spaces between rows
-set winminheight=0                   " Windows can be 0 line high
-set scrolljump=2                     " Lines to scroll when cursor leaves screen"
-set scrolloff=4                      " context in lines around the cursor
-set sidescrolloff=4                  " context in columns around the cursor
-set sidescroll=1                     " smooth scrolling by 1 column
+set magic                            " Enable extended regexp
+set modelines=3                      " check only first 3 lines for modeline
 set mouse=a                          " Enable mouse in GUI and terminal
 set mousehide                        " Hide the mouse cursor while typing"
-set vb t_vb=                         " no visual nor audio bell
-set splitright                       " put new vsplit windows to the right of the current
-set splitbelow                       " put new split windows to the bottom of the current
+set nobackup                         " don't make a backup before overwriting a file.
+set nocompatible                     " turn off compatibility with Vi
+set nofoldenable                     " dont fold by default
+set nojoinspaces                     " prevent inserting two spaces after punctuation on a join (J)"
+set norelativenumber                 " show absolute line numbers
+set noswapfile                       " don't need no stinky swapfiles
+set nowrap                           " don't wrap long lines by default
+set nowritebackup                    " ^^^
+set number                           " show line numbering
+set numberwidth=2                    " display 2 columns
 set pastetoggle=<F2>                 " easy toggling of paste mode
-set modelines=3                      " check only first 3 lines for modeline
-set encoding=utf-8                   " Use utf-8 encoding
-set termencoding=utf-8               " ditto
-set fileencodings=                   " don't do any encoding conversion (otherwise munges binary files)
-set shortmess+=filmnrxoOtT           " Abbrev. of messages (avoids 'hit enter')"
-set lazyredraw                       " Don't redraw the screen during complex operations
-set ttyfast                          " Indicates a fast terminal connection
-set virtualedit=onemore              " Allow for cursor beyond last character
-set laststatus=2                     " show the status line all the time
+set scrolljump=2                     " Lines to scroll when cursor leaves screen"
+set scrolloff=4                      " context in lines around the cursor
 set shell=$SHELL                     " Cause vim to spawn a login shell (will load chruby)
-set background=dark
-
-set wildignore+=*.o,*.obj,*~,*.png,*.gif,*.jpg,*.jpeg,*.zip,*.jar,*.pyc
-set wildignore+=*.gem,*/coverage/*,*/log/*,tags,*.rbc,*.ttf,*.eot
-"set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
-
-" . scan the current buffer ( 'wrapscan' is ignored)
-" w scan buffers from other windows
-" b scan other loaded buffers that are in the buffer list
-" u scan the unloaded buffers that are in the buffer list
-" U scan the buffers that are not in the buffer list
-set complete=.,w,b,u,U
-
-" NeoVim handles ESC keys as alt+key, set this to solve the problem
-set ttimeout
+set shiftround                       " round indent to multiple of 'shiftwidth'
+set shiftwidth=2                     " number of spaces for (un)indenting
+set shortmess+=filmnrxoOtT           " Abbrev. of messages (avoids 'hit enter')"
+set showbreak=↪                      " better line wraps
+set showcmd                          " display incomplete commands.
+set showmatch                        " when a bracket is inserted, briefly jump to the matching one
+set sidescroll=1                     " smooth scrolling by 1 column
+set sidescrolloff=4                  " context in columns around the cursor
+set smartcase                        " ...only when pattern is all lowercase
+set softtabstop=2                    " soft tab width
+set splitbelow                       " put new split windows to the bottom of the current
+set splitright                       " put new vsplit windows to the right of the current
+set switchbuf=useopen                " Switch to an existing buffer if one exists
+set tabstop=2                        " global tab width
+set termencoding=utf-8
+set termguicolors
+set ttimeout                         " NeoVim handles ESC keys as alt+key, set this to solve the problem
 set ttimeoutlen=0
-
-set inccommand=nosplit
+set ttyfast                          " Indicates a fast terminal connection
+set undodir=~/.vim/.undo              " directory where undo files are stored
+set undofile                         " undo previous actions even after you close and reopen a file.
+set undolevels=1000                  " remember more undo steps
+set undoreload=10000                 " Maximum number lines to save for undo on a buffer reload
+set updatetime=100                   " default updatetime 4000ms is not good for async update
+set vb t_vb=                         " no visual nor audio bell
+set virtualedit=block                " allow virtual editing in Visual block mode
+set virtualedit=onemore              " Allow for cursor beyond last character
+set wildignore+=*.gem,*/coverage/*,*/log/*,tags,*.rbc,*.ttf,*.eot
+set wildignore+=*.o,*.obj,*~,*.png,*.gif,*.jpg,*.jpeg,*.zip,*.jar,*.pyc
+set wildmenu                         " enable ctrl-n and ctrl-p to scroll thru matches
+set wildmode=list:longest,full       " make cmdline tab completion similar to bash
+set winminheight=0                   " Windows can be 0 line high
+"set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 
 if &diff
   set nonumber                       " no line numbers in vimdiff
 endif
 
-syntax on                            " Use colors
-filetype plugin indent on
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+endif
 
 " Toggle between line/block cursor shapes based on editing mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -209,17 +205,8 @@ inoremap <c-k> <Up>
 inoremap <c-h> <Left>
 inoremap <c-l> <Right>
 
-" strip trailing whitespace
-nnoremap <silent> <leader><space> mm:%s/\s\+$//e<CR>`m
-
-" auto indent whole file
-nnoremap <silent> <leader>= mmgg=G`m
-
 " Expand %% to buffer's path
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
-
-" Auto indent whole file
-nnoremap <silent> <leader>=call("normal gg=G")<CR>
 
 " Bash like keys for the command line
 cnoremap <C-a> <Home>
@@ -259,8 +246,7 @@ map 'p vi'p
 map (p vi(p
 map )p vi)p
 
-" smart file rename
-" stolen from: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+" smart file rename https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 function! RenameFile()
   let old_name = expand('%')
   let new_name = input('New file name: ', expand('%'))
@@ -335,54 +321,45 @@ endfunction
   \ catch /^Vim\%((\a\+)\)\=:E\%(553\|42\):/ |
   \ endtry
 
-if executable('rg')
-  set grepprg=rg\ --vimgrep
-endif
-
 call plug#begin('~/.local/share/nvim/plugged')
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'iCyMind/NeoSolarized'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
-Plug 'neomake/neomake'
-Plug 'parsonsmatt/intero-neovim'
-Plug 'vim-ruby/vim-ruby'
-Plug 'jgdavey/vim-blockle'
-Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
-Plug 'kchmck/vim-coffee-script'
-Plug 'vito-c/jq.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-surround'
-Plug 'mhinz/vim-signify'
-Plug 'mbbill/undotree'
-Plug 'lifepillar/pgsql.vim'
-Plug 'christoomey/vim-sort-motion'
-Plug 'machakann/vim-highlightedyank'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
-Plug 'janko-m/vim-test'
-Plug 'kassio/neoterm'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-sort-motion'
+Plug 'elzr/vim-json'
+Plug 'iCyMind/NeoSolarized'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'lifepillar/pgsql.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'mbbill/undotree'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neovimhaskell/haskell-vim'
+Plug 'm00qek/vim-pointfree'
+Plug 'pangloss/vim-javascript'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'szw/vim-maximizer'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vito-c/jq.vim'
 
 " Text objects
-Plug 'wellle/targets.vim'                     " Additional text objects
-Plug 'michaeljsmith/vim-indent-object'        " Indented text object
-Plug 'kana/vim-textobj-user'                  " Add additional text objects
-Plug 'kana/vim-textobj-entire'
-Plug 'kana/vim-textobj-indent'
-Plug 'jceb/vim-textobj-uri'                   " URL objects
-Plug 'glts/vim-textobj-comment'               " Comment text objects
-Plug 'kana/vim-textobj-function'              " Add function based text objects
 Plug 'bag-man/vim-textobj-keyvalue'           " Key value object
+Plug 'glts/vim-textobj-comment'               " Comment text objects
+Plug 'jceb/vim-textobj-uri'                   " URL objects
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-function'              " Add function based text objects
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-user'                  " Add additional text objects
+Plug 'michaeljsmith/vim-indent-object'        " Indented text object
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'reedes/vim-textobj-sentence'            " Sentence object<Paste>
 Plug 'thinca/vim-textobj-function-javascript' " Add JS function object
 Plug 'tpope/vim-jdaddy'                       " JSON text object
-Plug 'reedes/vim-textobj-sentence'            " Sentence object<Paste>
+Plug 'wellle/targets.vim'                     " Additional text objects
 call plug#end()
 
 " Plug 'iCyMind/NeoSolarized'
@@ -390,46 +367,17 @@ if filereadable(expand("$HOME/.local/share/nvim/plugged/NeoSolarized/colors/NeoS
   colorscheme NeoSolarized
 endif
 
-" Plug 'neomake/neomake'
-call neomake#configure#automake('nw', 1000)
-
-" Plug kassio/neoterm
-let g:neoterm_repl_ruby = 'bundle exec rails console'
-let g:neoterm_autoscroll = 1
-" 3<leader>tc will clear neoterm-3.
-nnoremap <leader>tc :<c-u>exec v:count.'Tclear'<cr>
-
-nmap gx <Plug>(neoterm-repl-send)
-xmap gx <Plug>(neoterm-repl-send)
-nmap gxx <Plug>(neoterm-repl-send-line)
-
-" Plug janko-m/vim-test
-let test#strategy = 'neoterm'
-let test#enabled_runners = ["ruby#rspec"]
-let g:test#ruby#rspec#executable = 'RAILS_ENV=test bundle exec rspec'
-let g:test#ruby#rspec#options = '--backtrace'
-let test#neovim#term_position = "topleft"
-
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
-
 " Plug 'szw/vim-maximizer'
 let g:maximizer_default_mapping_key = '<leader>z'
+let g:maximizer_set_default_mapping = 0
+let g:maximizer_set_mapping_with_bang = 0
 
-" Plug 'scrooloose/nerdtree'
+" Plug 'preservim/nerdtree'
 nmap <silent> <leader>y :NERDTreeToggle<CR>
 let NERDTreeMapOpenSplit="s"
 let NERDTreeMapOpenVSplit="v"
 let NERDTreeMinimalUI=1
 let NERDTreeIgnore=['\.rbc$', '\~$']
-
-" Plug 'mhinz/vim-signify'
-let g:signify_vcs_list = [ 'git' ]
-" be compatible with syntastic signs
-"let g:signify_sign_overwrite = 0
-"let g:signify_cursorhold_normal = 1
 
 " Plug 'mbbill/undotree'
 nnoremap <leader>u :UndotreeToggle<cr>
@@ -446,25 +394,8 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Plug #neovimhaskell/haskell-vim#
-let g:haskell_enable_quantification = 1   " highlight `forall`
-let g:haskell_enable_recursivedo = 1      " highlight `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " highlight `proc`
-let g:haskell_enable_pattern_synonyms = 1 " highlight `pattern`
-let g:haskell_enable_typeroles = 1        " highlight type roles
-let g:haskell_enable_static_pointers = 1  " highlight `static`
-let g:haskell_backpack = 1                " highlight backpack keywords
-
 " Plug 'lifepillar/pgsql.vim'
 let g:sql_type_default = 'pgsql'
-
-" Plug 'jgdavey/vim-blockle'
-let g:blockle_mapping = '<Leader>bl'
-
-" Intero starts automatically. Set this if you'd like to prevent that.
-let g:intero_start_immediately = 0
-let g:intero_type_on_hover = 1
-set updatetime=1000
 
 " In Neovim, you can set up fzf window using a Vim command
 let g:fzf_layout = { 'window': '10split enew' }
@@ -510,6 +441,93 @@ noremap <C-p> :FZF<cr>
 " --color:         Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" airblade/vim-gitgutter
+let g:gitgutter_preview_win_floating = 0
+
+" haskell-vim
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+" m00qek/pointfree
+nnoremap <silent> <Leader>. :call pointfree#suggestions()<CR>
+vnoremap <silent> <Leader>. :call pointfree#selection()<CR>
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Show documentation in preview window
+nnoremap <silent> <leader>cd :call <SID>show_documentation()<CR>
+
+" Navigate diagnostics
+nmap <silent> <leader>cp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>cn <Plug>(coc-diagnostic-next)
+
+" Goto actions
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Format selected region
+nmap <silent> <leader>cf :call CocAction('format')<cr>
+
+" Code action of current line
+nmap <leader>ca <Plug>(coc-codeaction)
+
+" Fix autofix problem of current line
+nmap <leader>cq <Plug>(coc-fix-current)
+
+" Restart coc
+nmap <leader>cr :CocRestart<cr>
+
+" Rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Using CocList
+nmap <leader>ff :CocList list<cr>
+nmap <leader>fb :CocList buffers<cr>
+nmap <leader>fg :CocList grep<cr>
+nmap <leader>fw :CocList words<cr>
+
 augroup misc
   au!
 
@@ -517,38 +535,51 @@ augroup misc
   " don't do it when writing a commit log entry
   au BufReadPost *
     \ if &filetype !~ 'commit\c' |
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \ exe "normal g`\"" |
-    \ endif |
+    \   if line("'\"") > 0 && line("'\"") <= line("$") |
+    \     exe "normal g`\"" |
+    \   endif |
     \ endif
 
   " open help in vertical split
-  au BufWinEnter *.txt
-    \ *.txt.gz
-    \ if &ft == 'help' | wincmd L | endif
+  au BufWinEnter *.txt,*.txt.gz if &ft == 'help' | wincmd L | endif
 
-  au BufWritePost init.vim
-    \ source $HOME/.config/nvim/init.vim
+  " source config after saving it
+  au BufWritePost init.vim source $HOME/.config/nvim/init.vim
 
   au BufRead,BufNewFile '
-    \ *.ru
     \ *.prawn
+    \ *.ru
     \ Gemfile
+    \ Guardfile
     \ Rakefile
     \ Thorfile
-    \ Guardfile
-    \ pryrc
-    \ aprc'
+    \ aprc
+    \ pryrc'
     \ set ft=ruby
 
-  au BufRead,BufNewFile *bash*
-    \ let b:is_bash=1 | setfiletype sh
+  au BufRead,BufNewFile *bash* let b:is_bash=1 | setfiletype sh
 
-  au BufWritePre *.rb,*.ms,*.html,*.js,*.ru,*.rake,*.md,*.py,*.js,*.md,*.hs,*.sql,vimrc,*.vim
+  au BufWritePre '
+    \ *.hs
+    \ *.html
+    \ *.js
+    \ *.md
+    \ *.ms
+    \ *.py
+    \ *.rake
+    \ *.rb
+    \ *.ru
+    \ *.sql
+    \ *.vim
+    \ vimrc'
     \ :call StripTrailingWhitespace()
 
-  au BufRead,BufNewFile *.json
-    \ set filetype=json
+  au BufRead,BufNewFile *.json set filetype=json
+
+  " Highlight symbol under cursor on CursorHold
+  au CursorHold * silent call CocActionAsync('highlight')
+    " Update signature help on jump placeholder
+  au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
   au FocusLost * :wa
 
@@ -559,49 +590,18 @@ augroup misc
   au InsertLeave * setlocal colorcolumn=0
 augroup END
 
-augroup intero
-  au!
-
-  " Background process and window management
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-  " Open intero/GHCi split horizontally
-  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  " Open intero/GHCi split vertically
-  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-
-  " Automatically reload on save
-  au BufWritePost *.hs InteroReload
-  " Manually save and reload
-  "au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
-
-  " Load individual modules
-  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-
-  " Type-related information
-  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
-  au FileType haskell map <silent> <leader>T <Plug>InteroType
-  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
-
-  " Navigation
-  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
-
-  " Managing targets
-  " Prompts you to enter targets (no silent):
-  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
-augroup END
-
 augroup fzf
   au!
 
   autocmd! FileType fzf
-  autocmd  FileType fzf
-    \ set laststatus=0 noshowmode noruler |
-    \ autocmd BufLeave <buffer>
-    \ set laststatus=2 showmode ruler
+
+  if !exists('g:fzf_layout')
+    autocmd  FileType fzf
+      \ set laststatus=0 noshowmode noruler |
+      \ autocmd BufLeave <buffer>
+      \ set laststatus=2 showmode ruler
+  endif
+
 augroup END
 
 " ~~~~~~~~~~~~ include local config  ~~~~~~~~~~~~~~

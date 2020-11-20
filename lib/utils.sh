@@ -60,6 +60,3 @@ qt() {
   #     │└─ search all files under each directory, recursively
   #     └─ ignore case
 }
-
-# diff-so-fancy not constrained to files in a git repo
-dsf() { git diff --no-index --color "$@" | diff-so-fancy; }

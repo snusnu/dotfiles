@@ -7,6 +7,7 @@
 
 set nocompatible                     " turn off compatibility with Vi
 
+set path+=**
 set magic                            " Enable extended regexp
 set hidden                           " allow buffer switching without saving
 set nowrap                           " don't wrap long lines by default
@@ -353,7 +354,6 @@ let ruby_fold = 1
 " Programming languages
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'ecomba/vim-ruby-refactoring'
 
 Plugin 'jgdavey/vim-blockle'
 let g:blockle_mapping = '<Leader>bl'
@@ -378,14 +378,14 @@ Plugin 'jwhitley/vim-colors-solarized'
 " Set this in case the terminal isn't using solarized theme
 " let g:solarized_termcolors=256
 
-Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
 nmap <silent> <leader>y :NERDTreeToggle<CR>
 let NERDTreeMapOpenSplit="s"
 let NERDTreeMapOpenVSplit="v"
 let NERDTreeMinimalUI=1
 let NERDTreeIgnore=['\.rbc$', '\~$']
 
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'preservim/nerdcommenter'
 
 Plugin 'vim-airline/vim-airline'
 "let g:airline_powerline_fonts = 1
@@ -474,7 +474,7 @@ let g:gist_open_browser_after_post = 1
 
 Plugin 'ngmy/vim-rubocop'
 
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
@@ -510,15 +510,9 @@ Plugin 'tpope/vim-fugitive'
 " cabbrev git Git
 
 Plugin 'junegunn/gv.vim'
-Plugin 'jreybert/vimagit'
-let g:magit_commit_title_limit = 72
-let g:magit_default_fold_level = 0
-let g:magit_default_sections = ['global_help', 'commit', 'staged', 'unstaged']
-
 Plugin 'wikimatze/hammer.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
-Plugin 'timcharper/textile.vim'
 
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'othree/html5.vim'
@@ -552,7 +546,6 @@ Plugin 'rstacruz/sparkup'
 Plugin 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = '<M-p>' " default
 
-Plugin 'LeonB/vim-nginx'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'yggdroot/indentline'
 let g:indentLine_enabled = 0
@@ -569,82 +562,11 @@ let g:rooter_silent_chdir = 1
 
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-projectionist'
-"Plugin 'tpope/vim-rails'
-
-let g:gem_projections = {
-  \ "devtools": {
-  \   "app/controllers/*.rb": {
-  \     "type": "controller",
-  \     "alternate": "spec/unit/controllers/{}_spec.rb"
-  \   },
-  \   "app/decorators/*.rb": {
-  \     "type": "decorator",
-  \     "alternate": "spec/unit/decorators/{}_spec.rb"
-  \   },
-  \   "app/forms/*.rb": {
-  \     "type": "form",
-  \     "alternate": "spec/unit/form/{}_spec.rb"
-  \   },
-  \   "app/helpers/*.rb": {
-  \     "type": "helper",
-  \     "alternate": "spec/unit/helpers/{}_spec.rb"
-  \   },
-  \   "app/mailers/*.rb": {
-  \     "type": "mailer",
-  \     "alternate": "spec/unit/mailers/{}_spec.rb"
-  \   },
-  \   "app/models/*.rb": {
-  \     "type": "model",
-  \     "alternate": "spec/unit/models/{}_spec.rb"
-  \   },
-  \   "app/responders/*.rb": {
-  \     "type": "responder",
-  \     "alternate": "spec/unit/responders/{}_spec.rb"
-  \   },
-  \   "lib/*.rb": {
-  \     "type": "lib",
-  \     "alternate": "spec/unit/lib/{}_spec.rb"
-  \   },
-  \   "spec/unit/controllers/*_spec.rb": {
-  \     "type": "controller",
-  \     "alternate": "app/controllers/{}.rb"
-  \   },
-  \   "spec/unit/decorators/*_spec.rb": {
-  \     "type": "decorator",
-  \     "alternate": "app/decorators/{}.rb"
-  \   },
-  \   "spec/unit/form/*_spec.rb": {
-  \     "type": "form",
-  \     "alternate": "app/forms/{}.rb"
-  \   },
-  \   "spec/unit/helpers/*_spec.rb": {
-  \     "type": "helper",
-  \     "alternate": "app/helpers/{}.rb"
-  \   },
-  \   "spec/unit/lib/*_spec.rb": {
-  \     "type": "lib",
-  \     "alternate": "lib/{}.rb"
-  \   },
-  \   "spec/unit/mailers/*_spec.rb": {
-  \     "type": "mailer",
-  \     "alternate": "app/mailers/{}.rb"
-  \   },
-  \   "spec/unit/models/*_spec.rb": {
-  \     "type": "model",
-  \     "alternate": "app/models/{}.rb"
-  \   },
-  \   "spec/unit/responders/*_spec.rb": {
-  \     "type": "responder",
-  \     "alternate": "app/responders/{}.rb"
-  \   }
-  \ }}
 
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 Plugin 'benmills/vimux'
-
 let g:VimuxOrientation = "v"
 let g:VimuxHeight = "40"
 let g:VimuxUseNearest = 0
@@ -669,11 +591,6 @@ map <Leader>vc :VimuxClearRunnerHistory<CR>
 
 " Zoom the tmux runner page
 map <Leader>vz :VimuxZoomRunner<CR>
-
-Plugin 'jgdavey/vim-turbux'
-let g:turbux_runner  = 'vimux'
-let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_command_rspec  = 'rspec'
 
 Plugin 'christoomey/vim-sort-motion'
 
